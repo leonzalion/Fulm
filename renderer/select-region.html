@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="./select-region.css" type="text/css" />
+</head>
+    <body>
+        <div id="border">
+        </div>
+    </body>
+    <script>
+        const api = require('./api');
+        window.addEventListener('contextmenu', async (e) => {
+          await api.showContextMenu();
+          e.preventDefault();
+        });
+    </script>
+</html>

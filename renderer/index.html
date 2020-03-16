@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <style>
+      ion-icon:hover {
+        cursor: pointer;
+      }
+      #record-icon {
+        font-size: 32px;
+        border: 5px solid black;
+        border-radius: 50%;
+        padding: 5px;
+        color: darkred;
+      }
+
+      #record-icon:hover {
+        cursor: pointer;
+      }
+
+      #settings-icon {
+        font-size: 24px;
+      }
+
+      #hide-capture-window-icon, #show-capture-window-icon {
+        font-size: 24px;
+      }
+
+      #hide-capture-window-icon {
+        display: none;
+      }
+
+    </style>
+  </head>
+  <body>
+    <button onClick="api.hideCaptureWindow()" id="hide-capture-area">Hide the capture area!</button>
+    <button onClick="api.showCaptureWindow()" id="show-capture-area">Show the capture area!</button>
+    <button onClick="api.startRecording()">Start Recording!</button>
+    <button onClick="api.stopRecording()">Stop Recording!</button>
+    <ion-icon name="videocam" id="record-icon"></ion-icon>
+    <ion-icon name="settings-sharp" id="settings-icon"></ion-icon>
+    <ion-icon name="scan-sharp" id="show-capture-window-icon"></ion-icon>
+    <ion-icon name="scan-outline" id="hide-capture-window-icon"></ion-icon>
+    <img id="most-recent-screenshot" height="400"/>
+    <script src="./index.js"></script>
+  </body>
+</html>
