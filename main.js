@@ -8,11 +8,19 @@ let willQuitApp = false;
 let tray = null;
 
 async function main() {
-  tray = new Tray('./assets/logo.png');
-
   const screenCapturer = new ScreenCapturer();
   let mainWindow = screenCapturer.mainWindow;
-  // mainWindow.webContents.openDevTools();
+
+  tray = new Tray('./assets/logo.png');
+
+  tray.on('click', toggleWindow);
+  tray.on('double-click', toggleWindow);
+  tray.on('right-click', toggleWindow);
+
+  function toggleWindow() {
+    if (mainWindow.isVisible()) mainWindow.hide();
+    else mainWindow.show();
+  }
 
   mainWindow.on('close', (e) => {
     if (!willQuitApp) {
@@ -20,6 +28,19 @@ async function main() {
       mainWindow.hide();
     }
   });
+
+  const windowBounds = mainWindow.getBounds();
+  const trayBounds = tray.getBounds();
+
+  // Center window horizontally below the tray icon
+  const x = Math.round(trayBounds.x + (trayBounds.width / 2)
+    - (windowBounds.width / 2));
+
+  // Position window 4 pixels vertically below the tray icon
+  const y = Math.round(trayBounds.y + trayBounds.height + 4);
+
+  mainWindow.setBounds({x, y});
+  mainWindow.show();
 }
 
 app.on('ready', main);

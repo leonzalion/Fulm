@@ -119,11 +119,22 @@ class ScreenCapturer {
     this.captureWindow.setAlwaysOnTop(true, "pop-up-menu", 1);
     this.captureWindow.setPosition(this.x, this.y);
 
-    this.mainWindow = new Window({file: './renderer/index.html', showOnReady: true});
+    this.mainWindow = new Window({
+      file: './renderer/index.html',
+      width: 140,
+      height: 85,
+      frame: false,
+      resizable: false,
+      acceptFirstMouse: true
+    });
 
     this.saveWindow = new Window({
       file: './renderer/save.html',
-    })
+    });
+
+    this.settingsWindow = new Window({
+      file: './renderer/settings.html'
+    });
   }
 
   setupHandlers() {
@@ -133,7 +144,8 @@ class ScreenCapturer {
       stopRecording: function() {self.stopRecording()},
       hideCaptureWindow: function() {self.captureWindow.hide()},
       showCaptureWindow: function() {self.captureWindow.show()},
-      showContextMenu: function() {self.captureWindowContextMenu.popup()}
+      showContextMenu: function() {self.captureWindowContextMenu.popup()},
+      showSettingsWindow: function() {self.settingsWindow.show()},
     };
 
     Object.keys(handlers).forEach(function(channel) {

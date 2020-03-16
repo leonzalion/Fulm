@@ -1,21 +1,19 @@
 const api = require('./api');
 const {ipcRenderer} = require('electron');
 
-const hideCaptureWindowIcon = document.getElementById('hide-capture-window-icon');
-const showCaptureWindowIcon = document.getElementById('show-capture-window-icon');
+const captureWindowIcons = $('#show-capture-window-icon, #hide-capture-window-icon');
 
-hideCaptureWindowIcon.addEventListener('click', function() {
-  hideCaptureWindowIcon.style.display = 'none';
-  showCaptureWindowIcon.style.display = 'inline-block';
+captureWindowIcons.click(function() {
+  captureWindowIcons.toggleClass('hidden');
 });
 
-showCaptureWindowIcon.addEventListener('click', function() {
-  showCaptureWindowIcon.style.display = 'none';
-  hideCaptureWindowIcon.style.display = 'inline-block';
+const recordingIcons = $('#start-recording-icon, #stop-recording-icon');
+recordingIcons.click(function() {
+  recordingIcons.toggleClass('hidden');
 });
 
 ipcRenderer.on('tookScreenshot', function(event, imgPath) {
   console.log(imgPath);
-  document.getElementById('most-recent-screenshot').src = imgPath;
+  $('#most-recent-screenshot').attr('src', imgPath);
 });
 

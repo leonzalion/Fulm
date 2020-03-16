@@ -5,45 +5,116 @@
     <title>Hello World!</title>
     <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
     <style>
+      html, body {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
       ion-icon:hover {
         cursor: pointer;
       }
-      #record-icon {
+
+      #start-recording-icon, #stop-recording-icon {
         font-size: 32px;
-        border: 5px solid black;
+        border: 2px solid black;
         border-radius: 50%;
         padding: 5px;
+        margin: 4px;
+        justify-self: start;
         color: darkred;
+        grid-area: 1 / 1 / -1 / span 1;
       }
 
-      #record-icon:hover {
-        cursor: pointer;
-      }
 
+      #hide-capture-window-icon, #show-capture-window-icon,
+      #open-in-window-icon, #open-recent-screenshot-window-icon,
       #settings-icon {
         font-size: 24px;
       }
 
-      #hide-capture-window-icon, #show-capture-window-icon {
+      #stop-recording-icon {
         font-size: 24px;
+        padding: 9px;
+      }
+
+
+      .hidden {
+        display: none;
+      }
+
+      #settings-icon {
+        grid-area: 1 / 2 / span 1 / span 1;
+      }
+
+      #hide-capture-window-icon, #show-capture-window-icon {
+        grid-area: 2 / 2 / span 1 / span 1;
       }
 
       #hide-capture-window-icon {
-        display: none;
+        --ionicon-stroke-width: 72px;
+      }
+
+      .icon-grid {
+        display: grid;
+        grid-template: 1fr 1fr / 2fr 1fr 1fr;
+        width: 120px;
+        height: 60px;
+        justify-items: center;
+        align-items: center;
+      }
+
+      #open-recent-screenshot-window-icon {
+        grid-area: 2 / 3 / span 1 / span 1;
+      }
+
+      #open-in-window-icon {
+        grid-area: 1 / 3 / span 1 / span 1;
+      }
+
+      .icon-grid-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
       }
 
     </style>
   </head>
   <body>
-    <button onClick="api.hideCaptureWindow()" id="hide-capture-area">Hide the capture area!</button>
-    <button onClick="api.showCaptureWindow()" id="show-capture-area">Show the capture area!</button>
-    <button onClick="api.startRecording()">Start Recording!</button>
-    <button onClick="api.stopRecording()">Stop Recording!</button>
-    <ion-icon name="videocam" id="record-icon"></ion-icon>
-    <ion-icon name="settings-sharp" id="settings-icon"></ion-icon>
-    <ion-icon name="scan-sharp" id="show-capture-window-icon"></ion-icon>
-    <ion-icon name="scan-outline" id="hide-capture-window-icon"></ion-icon>
-    <img id="most-recent-screenshot" height="400"/>
+    <div class="icon-grid-container">
+      <div class="icon-grid">
+        <ion-icon name="videocam" onClick="api.startRecording()"
+                  id="start-recording-icon"></ion-icon>
+        <ion-icon name="square" onClick="api.stopRecording()"
+                  id="stop-recording-icon" class="hidden"></ion-icon>
+        <ion-icon name="scan-outline" id="show-capture-window-icon"
+                  onclick="api.showCaptureWindow()"></ion-icon>
+        <ion-icon name="scan-outline" id="hide-capture-window-icon"
+                  onclick="api.hideCaptureWindow()" class="hidden"></ion-icon>
+        <ion-icon name="settings-outline" id="settings-icon"
+                  onclick="api.showSettingsWindow()"></ion-icon>
+        <ion-icon name="image-outline"
+                  id="open-recent-screenshot-window-icon"></ion-icon>
+        <ion-icon name="open-outline" id="open-in-window-icon"></ion-icon>
+      </div>
+    </div>
+
+    <!-- Insert this line above script imports  -->
+    <script>
+      if (typeof module === 'object') {
+        window.module = module; module = undefined;
+      }
+    </script>
+
+    <!-- normal script imports etc  -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+            crossorigin="anonymous"></script>
     <script src="./index.js"></script>
+
+    <!-- Insert this line after script imports -->
+    <script>if (window.module) module = window.module;</script>
   </body>
 </html>
