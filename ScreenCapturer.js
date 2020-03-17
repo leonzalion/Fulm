@@ -140,7 +140,7 @@ class ScreenCapturer {
         mainWindowOptions.vibrancy = 'menu';
         break;
       case 'win32':
-        mainWindowOptions.backgroundColor = 'black';
+        mainWindowOptions.backgroundColor = '#000';
         mainWindowOptions.center = true;
         mainWindowOptions.showOnReady = true;
         break;
