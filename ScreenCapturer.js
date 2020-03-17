@@ -3,7 +3,7 @@ const Window = require('./Window');
 const path = require('path');
 const fs = require('fs');
 const Jimp = require('jimp');
-const {app, Menu, screen, ipcMain, dialog} = require('electron');
+const {app, Menu, screen, ipcMain, dialog, process} = require('electron');
 const dateFormat = require('dateformat');
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 const spawn = require('child_process').spawn;
@@ -126,17 +126,25 @@ class ScreenCapturer {
     this.captureWindow.setAlwaysOnTop(true, "pop-up-menu", 1);
     this.captureWindow.setPosition(this.x, this.y);
 
-    this.mainWindow = new Window({
+    const mainWindowOptions = {
       file: './renderer/index.html',
       width: 140,
       height: 85,
       frame: false,
       resizable: false,
       acceptFirstMouse: true,
-      vibrancy: 'menu',
-      center: true,
-      showOnReady: true
-    });
+    };
+    switch (process.platform) {
+      case 'darwin':
+        mainWindowOptions.vibrancy = 'menu';
+        break;
+      case 'win32':
+        mainWindowOptions.backgroundColor = 'black';
+        mainWindowOptions.center = true;
+        mainWindowOptions.showOnReady = true;
+        break;
+    }
+    this.mainWindow = new Window(mainWindowOptions);
     this.mainWindow.setAlwaysOnTop(true, "pop-up-menu", 1);
 
     this.saveWindow = new Window({
