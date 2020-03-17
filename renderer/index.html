@@ -12,21 +12,24 @@
         width: 100%;
         height: 100%;
       }
+
+      ion-icon {
+        color: white;
+      }
+
       ion-icon:hover {
         cursor: pointer;
       }
 
       #start-recording-icon, #stop-recording-icon {
         font-size: 32px;
-        border: 2px solid black;
+        border: 2px solid white;
         border-radius: 50%;
         padding: 5px;
         margin: 4px;
         justify-self: start;
-        color: darkred;
         grid-area: 1 / 1 / -1 / span 1;
       }
-
 
       #hide-capture-window-icon, #show-capture-window-icon,
       #open-in-window-icon, #open-recent-screenshot-window-icon,
@@ -85,36 +88,18 @@
   <body>
     <div class="icon-grid-container">
       <div class="icon-grid">
-        <ion-icon name="videocam" onClick="api.startRecording()"
-                  id="start-recording-icon"></ion-icon>
-        <ion-icon name="square" onClick="api.stopRecording()"
+        <ion-icon name="videocam" id="start-recording-icon"></ion-icon>
+        <ion-icon name="square"
                   id="stop-recording-icon" class="hidden"></ion-icon>
-        <ion-icon name="scan-outline" id="show-capture-window-icon"
-                  onclick="api.showCaptureWindow()"></ion-icon>
+        <ion-icon name="scan-outline" id="show-capture-window-icon"></ion-icon>
         <ion-icon name="scan-outline" id="hide-capture-window-icon"
-                  onclick="api.hideCaptureWindow()" class="hidden"></ion-icon>
-        <ion-icon name="settings-outline" id="settings-icon"
-                  onclick="api.showSettingsWindow()"></ion-icon>
+                  class="hidden"></ion-icon>
+        <ion-icon name="settings-outline" id="settings-icon"></ion-icon>
         <ion-icon name="image-outline"
                   id="open-recent-screenshot-window-icon"></ion-icon>
         <ion-icon name="open-outline" id="open-in-window-icon"></ion-icon>
       </div>
     </div>
-
-    <!-- Insert this line above script imports  -->
-    <script>
-      if (typeof module === 'object') {
-        window.module = module; module = undefined;
-      }
-    </script>
-
-    <!-- normal script imports etc  -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-            crossorigin="anonymous"></script>
-    <script src="./index.js"></script>
-
-    <!-- Insert this line after script imports -->
-    <script>if (window.module) module = window.module;</script>
+    <script src="index.js"></script>
   </body>
 </html>

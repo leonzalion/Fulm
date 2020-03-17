@@ -2,12 +2,40 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">
     <title>Save Time-Lapse</title>
     <link href="./save.css" type="text/css" rel="stylesheet" />
+    <style>
+      #save-time-lapse {
+        display: inline-block;
+        background-color: orange;
+        border-radius: 10px;
+      }
+
+      #save-time-lapse-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .save-text {
+        font-family: Arial, sans-serif;
+        margin: 10px;
+      }
+    </style>
   </head>
   <body>
+    <div id="change-save-directory">
+      <input type="text" readonly />
+      <ion-icon name="folder-outline"></ion-icon>
+    </div>
+
+    <div id="save-time-lapse-container">
+      <div id="save-time-lapse">
+        <ion-icon name="save-outline"></ion-icon>
+        <div class="save-text">Save</div>
+      </div>
+    </div>
+
     <div id="container">
       <div id="progress-bar-container">
         <div id="progress-bar">

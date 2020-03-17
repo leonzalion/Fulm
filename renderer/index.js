@@ -1,19 +1,53 @@
-const api = require('./api');
+const $ = require('jquery');
 const {ipcRenderer} = require('electron');
+const observeStore = require('../redux/observeStore');
+const store = require('../redux/createRendererStore')();
 
-const captureWindowIcons = $('#show-capture-window-icon, #hide-capture-window-icon');
+const showCaptureWindowIcon = $('#show-capture-window-icon');
+const hideCaptureWindowIcon = $('#hide-capture-window-icon');
+const startRecordingIcon = $('#start-recording-icon');
+const stopRecordingIcon = $('#stop-recording-icon');
 
-captureWindowIcons.click(function() {
-  captureWindowIcons.toggleClass('hidden');
+observeStore(store, state => state.captureWindow.isOpen, function(isOpen) {
+  showCaptureWindowIcon.toggleClass('hidden', isOpen);
+  hideCaptureWindowIcon.toggleClass('hidden', !isOpen);
 });
 
-const recordingIcons = $('#start-recording-icon, #stop-recording-icon');
-recordingIcons.click(function() {
-  recordingIcons.toggleClass('hidden');
+observeStore(store, state => state.recording.state, state => {
+  switch (state) {
+    case 'RECORDING':
+      stopRecordingIcon.show();
+      startRecordingIcon.hide();
+      break;
+    case 'STOPPED':
+      stopRecordingIcon.hide();
+      startRecordingIcon.show();
+  }
 });
+
+showCaptureWindowIcon.click(() => store.dispatch({
+  type: 'TOGGLE_CAPTURE_WINDOW',
+  payload: true
+}));
+
+hideCaptureWindowIcon.click(() => store.dispatch({
+  type: 'TOGGLE_CAPTURE_WINDOW',
+  payload: false
+}));
+
+startRecordingIcon.click(() => {
+  store.dispatch({
+    type: 'CHANGE_RECORDING_STATE',
+    payload: 'RECORDING'
+  })
+});
+
+stopRecordingIcon.click(() => store.dispatch({
+  type: 'CHANGE_RECORDING_STATE',
+  payload: 'STOPPED'
+}));
 
 ipcRenderer.on('tookScreenshot', function(event, imgPath) {
   console.log(imgPath);
   $('#most-recent-screenshot').attr('src', imgPath);
 });
-

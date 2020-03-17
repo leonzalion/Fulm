@@ -3,10 +3,11 @@ const Window = require('./Window');
 const path = require('path');
 const fs = require('fs');
 const Jimp = require('jimp');
-const {app, Menu, screen, ipcMain} = require('electron');
+const {app, Menu, screen, ipcMain, dialog} = require('electron');
 const dateFormat = require('dateformat');
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 const spawn = require('child_process').spawn;
+const observeStore = require('./redux/observeStore');
 
 class ScreenCapturer {
   x = 0;
@@ -18,12 +19,14 @@ class ScreenCapturer {
   screenshotNumber = 1;
 
   constructor({
+    store,
     x = this.x,
     y = this.y,
     width = this.width,
     height = this.height,
     screenshotDelay = this.screenshotDelay
   } = {}) {
+    this.store = store;
     this.x = x;
     this.y = y;
     this.width = width;
@@ -35,12 +38,14 @@ class ScreenCapturer {
 
     this.setupPaths();
     this.setupWindows();
-    this.setupHandlers();
     this.setupMenu();
+    this.setupObservers();
     this.debug();
   };
 
   debug() {
+    //this.mainWindow.webContents.openDevTools({mode: 'detach'});
+    //this.saveWindow.webContents.openDevTools({mode: 'detach'});
   }
 
   setupPaths() {
@@ -57,15 +62,17 @@ class ScreenCapturer {
     this.captureWindowContextMenu = Menu.buildFromTemplate([
       {
         label: "Start Capture",
-        click: function() {
-          self.startRecording();
-        }
+        click: () => self.store.dispatch({
+          type: 'CHANGE_RECORDING_STATE',
+          payload: 'RECORDING'
+        })
       },
       {
-        label: "Hide Capture Screen",
-        click: function() {
-          self.captureWindow.hide();
-        }
+        label: "Hide Capture Window",
+        click: () => self.store.dispatch({
+          type: 'TOGGLE_CAPTURE_WINDOW',
+          payload: false
+        })
       },
       {
         label: "Snap to Top-Left",
@@ -125,8 +132,10 @@ class ScreenCapturer {
       height: 85,
       frame: false,
       resizable: false,
-      acceptFirstMouse: true
+      acceptFirstMouse: true,
+      vibrancy: 'menu'
     });
+    this.mainWindow.setAlwaysOnTop(true, "pop-up-menu", 1);
 
     this.saveWindow = new Window({
       file: './renderer/save.html',
@@ -137,19 +146,63 @@ class ScreenCapturer {
     });
   }
 
-  setupHandlers() {
-    const self = this;
-    const handlers = {
-      startRecording: function() {self.startRecording()},
-      stopRecording: function() {self.stopRecording()},
-      hideCaptureWindow: function() {self.captureWindow.hide()},
-      showCaptureWindow: function() {self.captureWindow.show()},
-      showContextMenu: function() {self.captureWindowContextMenu.popup()},
-      showSettingsWindow: function() {self.settingsWindow.show()},
-    };
+  setupObservers() {
+    // watch capture window
+    observeStore(this.store, state => state.captureWindow.isOpen, isOpen => {
+      if (isOpen) this.captureWindow.show();
+      else this.captureWindow.hide();
+    });
 
-    Object.keys(handlers).forEach(function(channel) {
-      ipcMain.handle(channel, handlers[channel]);
+    observeStore(this.store, state => state.recording.state, state => {
+      switch (state) {
+        case 'RECORDING':
+          this.startRecording();
+          break;
+        case 'STOPPED':
+          this.stopRecording();
+          break;
+      }
+    });
+
+    ipcMain.handle('selectDirectory', () => {
+      return dialog.showOpenDialogSync({
+        properties: ["openDirectory", "createDirectory"]
+      });
+    });
+
+    ipcMain.handle('openContextMenu', () => {
+      this.captureWindowContextMenu.popup();
+    });
+  }
+
+  saveRecording() {
+    const numScreenshots = this.numScreenshots;
+
+    const dateIdentifier = dateFormat(new Date(), "yyyy-mm-dd'T'HH-MM-ss");
+    const videoPath = path.join(this.videoDir, `${dateIdentifier}.mp4`);
+
+    // ffmpeg -framerate 24 -i ~/Desktop/WBSScreenshots/$uuid-%08d.jpg $name.mp4
+    const ffmpeg = spawn(ffmpegPath, [
+      '-framerate', '24',
+      '-i', `${this.saveDir}/%d.jpg`,
+      '-pix_fmt', 'yuv420p',
+      videoPath
+    ]);
+    ffmpeg.stdout.setEncoding('utf8');
+
+    const self = this;
+    ffmpeg.stderr.on('data', function(data) {
+      const matches = /frame=\s*(\d+)/g.exec(data);
+      if (matches !== null) {
+        const percentage = matches[1] / numScreenshots * 100;
+        console.log(percentage + '%');
+        self.saveWindow.send('saveProgressUpdate', percentage);
+      }
+    });
+
+    ffmpeg.on('exit', function() {
+      console.log('Time-lapse saved.');
+      self.saveWindow.close();
     });
   }
 
@@ -207,39 +260,13 @@ class ScreenCapturer {
   stopRecording() {
     clearInterval(this.recordingIntervalId);
     this.isRecording = false;
-    const numScreenshots = this.screenshotNumber;
+    this.numScreenshots = this.screenshotNumber;
     this.screenshotNumber = 1;
     this.unlockRecordingScreen();
     this.captureWindow.hide();
     this.saveWindow.show();
-
-    const dateIdentifier = dateFormat(new Date(), "yyyy-mm-dd'T'HH-MM-ss");
-    const videoPath = path.join(this.videoDir, `${dateIdentifier}.mp4`);
-
-    // ffmpeg -framerate 24 -i ~/Desktop/WBSScreenshots/$uuid-%08d.jpg $name.mp4
-    const ffmpeg = spawn(ffmpegPath, [
-      '-framerate', '24',
-      '-i', `${this.saveDir}/%d.jpg`,
-      '-pix_fmt', 'yuv420p',
-      videoPath
-    ]);
-    ffmpeg.stdout.setEncoding('utf8');
-
-    const self = this;
-    ffmpeg.stderr.on('data', function(data) {
-      const matches = /frame=\s*(\d+)/g.exec(data);
-      if (matches !== null) {
-        const percentage = matches[1] / numScreenshots * 100;
-        console.log(percentage + '%');
-        self.saveWindow.send('saveProgressUpdate', percentage);
-      }
-    });
-
-    ffmpeg.on('exit', function() {
-      console.log('Time-lapse saved.');
-      self.saveWindow.close();
-    });
   }
+
 
 }
 

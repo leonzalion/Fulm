@@ -23,7 +23,10 @@
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "dateformat": "^3.0.3",
+    "electron-redux": "^1.4.0",
     "jimp": "^0.9.5",
+    "jquery": "^3.4.1",
+    "redux": "^4.0.5",
     "screenshot-desktop": "^1.12.0"
   }
 }

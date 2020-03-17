@@ -2,14 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ecdd984f-84e1-4170-b670-ae5381f54271" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Fulmeto.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Fulmeto.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/createMainStore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/createRendererStore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/initialState.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/observeStore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/reducers/captureWindow.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/reducers/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/reducers/recording.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/reducers/saveStatus.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/reducers/settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ScreenCapturer.js" beforeDir="false" afterPath="$PROJECT_DIR$/ScreenCapturer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/record.svg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/api.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/renderer/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/renderer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/save.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/save.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/save.js" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/save.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/select-region.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/select-region.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,16 +60,18 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.HTML" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/redux" />
       <recent name="$PROJECT_DIR$/assets" />
-      <recent name="$PROJECT_DIR$/node_modules" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/renderer" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/assets" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/redux/reducers" />
       <recent name="$PROJECT_DIR$/renderer" />
+      <recent name="$PROJECT_DIR$/redux" />
+      <recent name="$PROJECT_DIR$/reducers" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -94,6 +109,7 @@
       <workItem from="1584322804685" duration="4793000" />
       <workItem from="1584366292692" duration="8288000" />
       <workItem from="1584378628789" duration="23000" />
+      <workItem from="1584442860077" duration="15230000" />
     </task>
     <servers />
   </component>
@@ -106,15 +122,15 @@
     </state>
     <state x="612" y="328" key="SettingsEditor/0.23.1680.1027@0.23.1680.1027" timestamp="1584214718066" />
     <state x="933" y="466" key="SettingsEditor/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1584370863800" />
-    <state x="1239" y="396" width="1041" height="671" key="find.popup" timestamp="1584298011309">
+    <state x="1239" y="396" width="1041" height="671" key="find.popup" timestamp="1584458943921">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="813" y="293" width="683" height="486" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1584058955226" />
-    <state x="1239" y="396" width="1041" height="671" key="find.popup/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1584298011309" />
-    <state x="1359" y="336" width="1021" height="933" key="search.everywhere.popup" timestamp="1584370830157">
+    <state x="1239" y="396" width="1041" height="671" key="find.popup/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1584458943921" />
+    <state x="1359" y="336" width="1021" height="933" key="search.everywhere.popup" timestamp="1584460428287">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="892" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1584128359536" />
-    <state x="1359" y="336" width="1021" height="933" key="search.everywhere.popup/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1584370830157" />
+    <state x="1359" y="336" width="1021" height="933" key="search.everywhere.popup/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1584460428287" />
   </component>
 </project>

@@ -8,9 +8,9 @@
         </div>
     </body>
     <script>
-        const api = require('./api');
-        window.addEventListener('contextmenu', async (e) => {
-          await api.showContextMenu();
+        const {ipcRenderer} = require('electron');
+        window.addEventListener('contextmenu', (e) => {
+          ipcRenderer.invoke('openContextMenu');
           e.preventDefault();
         });
     </script>

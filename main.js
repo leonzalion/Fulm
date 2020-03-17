@@ -1,14 +1,15 @@
 'use strict';
 
 const {app, ipcMain, Menu, Tray} = require('electron');
-app.allowRendererProcessReuse = true;
 const ScreenCapturer = require('./ScreenCapturer');
+const store = require('./redux/createMainStore')();
 
+app.allowRendererProcessReuse = true;
 let willQuitApp = false;
 let tray = null;
 
 async function main() {
-  const screenCapturer = new ScreenCapturer();
+  const screenCapturer = new ScreenCapturer({store});
   let mainWindow = screenCapturer.mainWindow;
 
   tray = new Tray('./assets/logo.png');
