@@ -3,7 +3,7 @@ const Window = require('./Window');
 const path = require('path');
 const fs = require('fs');
 const Jimp = require('jimp');
-const {app, Menu, screen, ipcMain, dialog, process} = require('electron');
+const {app, Menu, screen, ipcMain, dialog} = require('electron');
 const dateFormat = require('dateformat');
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 const spawn = require('child_process').spawn;
@@ -134,6 +134,7 @@ class ScreenCapturer {
       resizable: false,
       acceptFirstMouse: true,
     };
+
     switch (process.platform) {
       case 'darwin':
         mainWindowOptions.vibrancy = 'menu';
