@@ -8,6 +8,7 @@ const dateFormat = require('dateformat');
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 const spawn = require('child_process').spawn;
 const observeStore = require('./redux/observeStore');
+const contextMenu = require('electron-context-menu');
 
 class ScreenCapturer {
   x = 0;
@@ -59,53 +60,57 @@ class ScreenCapturer {
 
   setupMenu() {
     const self = this;
-    this.captureWindowContextMenu = Menu.buildFromTemplate([
-      {
-        label: "Start Capture",
-        click: () => self.store.dispatch({
-          type: 'CHANGE_RECORDING_STATE',
-          payload: 'RECORDING'
-        })
-      },
-      {
-        label: "Hide Capture Window",
-        click: () => self.store.dispatch({
-          type: 'TOGGLE_CAPTURE_WINDOW',
-          payload: false
-        })
-      },
-      {
-        label: "Snap to Top-Left",
-        click: function() {
-          self.captureWindow.setBounds({x: 0, y: 0});
+    contextMenu({
+      showInspectElement: false,
+      prepend: (defaultActions, params, browserWindow) => [
+        {
+          label: "Start Capture",
+          click: () => self.store.dispatch({
+            type: 'CHANGE_RECORDING_STATE',
+            payload: 'RECORDING'
+          })
+        },
+        {
+          label: "Hide Capture Window",
+          click: () => self.store.dispatch({
+            type: 'TOGGLE_CAPTURE_WINDOW',
+            payload: false
+          })
+        },
+        {
+          label: "Snap to Top-Left",
+          click: function() {
+            self.captureWindow.setBounds({x: 0, y: 0});
+          }
+        },
+        {
+          label: "Display to Capture",
+          submenu: self.displays.map(function(display, i) {
+            return {
+              type: 'radio',
+              checked: i === 0,
+              label: `Display ${i}: ${display.size.width}x${display.size.height}`,
+              click: function() {
+                self.captureDisplay = display;
+                self.captureDisplayId = i;
+              }
+            };
+          })
+        },
+        {
+          label: "Fit to Screen",
+          click: function() {
+            self.captureWindow.setBounds(self.captureDisplay.bounds);
+          }
+        },
+        {
+          label: "Hide Border when Recording",
+          click: function() {
+          }
         }
-      },
-      {
-        label: "Display to Capture",
-        submenu: self.displays.map(function(display, i) {
-          return {
-            type: 'radio',
-            checked: i === 0,
-            label: `Display ${i}: ${display.size.width}x${display.size.height}`,
-            click: function() {
-              self.captureDisplay = display;
-              self.captureDisplayId = i;
-            }
-          };
-        })
-      },
-      {
-        label: "Fit to Screen",
-        click: function() {
-          self.captureWindow.setBounds(self.captureDisplay.bounds);
-        }
-      },
-      {
-        label: "Hide Border when Recording",
-        click: function() {
-        }
-      }
-    ]);
+      ],
+      window: self.captureWindow
+    });
   }
 
   setupWindows() {
@@ -117,6 +122,7 @@ class ScreenCapturer {
       frame: false,
       backgroundColor: '#10FFFFFF',
       enableLargerThanScreen: true,
+      resizable: true,
       webPreferences: {
         nodeIntegration: true
       }
@@ -179,10 +185,6 @@ class ScreenCapturer {
       return dialog.showOpenDialogSync({
         properties: ["openDirectory", "createDirectory"]
       });
-    });
-
-    ipcMain.handle('openContextMenu', () => {
-      this.captureWindowContextMenu.popup();
     });
   }
 

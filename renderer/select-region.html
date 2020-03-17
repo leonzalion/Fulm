@@ -7,11 +7,4 @@
         <div id="border">
         </div>
     </body>
-    <script>
-        const {ipcRenderer} = require('electron');
-        window.addEventListener('contextmenu', (e) => {
-          ipcRenderer.invoke('openContextMenu');
-          e.preventDefault();
-        });
-    </script>
 </html>
