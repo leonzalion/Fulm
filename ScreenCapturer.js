@@ -133,7 +133,9 @@ class ScreenCapturer {
       frame: false,
       resizable: false,
       acceptFirstMouse: true,
-      vibrancy: 'menu'
+      vibrancy: 'menu',
+      center: true,
+      showOnReady: true
     });
     this.mainWindow.setAlwaysOnTop(true, "pop-up-menu", 1);
 
