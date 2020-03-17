@@ -40,7 +40,7 @@ async function main() {
   // Position window 4 pixels vertically below the tray icon
   const y = Math.round(trayBounds.y + trayBounds.height + 4);
 
-  mainWindow.setBounds({x, y});
+  // mainWindow.setBounds({x, y});
   mainWindow.show();
 }
 
