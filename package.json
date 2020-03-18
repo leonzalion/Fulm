@@ -27,6 +27,7 @@
     "electron-redux": "^1.4.0",
     "jimp": "^0.9.5",
     "jquery": "^3.4.1",
+    "menubar": "^8.0.1",
     "redux": "^4.0.5",
     "screenshot-desktop": "^1.12.0"
   }

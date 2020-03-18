@@ -3,6 +3,7 @@
 const {app, ipcMain, Menu, Tray} = require('electron');
 const ScreenCapturer = require('./ScreenCapturer');
 const store = require('./redux/createMainStore')();
+const {menubar} = require('menubar');
 
 app.allowRendererProcessReuse = true;
 let willQuitApp = false;
