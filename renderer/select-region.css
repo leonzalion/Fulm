@@ -4,13 +4,19 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+body {
+  padding: 10px;
+}
+
 * {
   box-sizing: border-box;
 }
-body {
+#container {
   overflow: hidden;
   -webkit-app-region: drag;
 }
+
 #border {
   border-width: 1px;
   border-color: black;

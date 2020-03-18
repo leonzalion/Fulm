@@ -48,7 +48,7 @@
         display: none;
       }
 
-      #settings-icon {
+      #show-settings-icon, #hide-capture-window-icon {
         grid-area: 1 / 2 / span 1 / span 1;
       }
 
@@ -56,7 +56,7 @@
         grid-area: 2 / 2 / span 1 / span 1;
       }
 
-      #hide-capture-window-icon {
+      #hide-capture-window-icon, #hide-settings-icon {
         --ionicon-stroke-width: 72px;
       }
 
@@ -92,10 +92,15 @@
         <ion-icon name="videocam" id="start-recording-icon"></ion-icon>
         <ion-icon name="square"
                   id="stop-recording-icon" class="hidden"></ion-icon>
+
         <ion-icon name="scan-outline" id="show-capture-window-icon"></ion-icon>
         <ion-icon name="scan-outline" id="hide-capture-window-icon"
                   class="hidden"></ion-icon>
-        <ion-icon name="settings-outline" id="settings-icon"></ion-icon>
+
+        <ion-icon name="settings-outline" id="show-settings-icon"></ion-icon>
+        <ion-icon name="settings-outline" id="hide-settings-icon"
+                  class="hidden"></ion-icon>
+
         <ion-icon name="image-outline"
                   id="open-recent-screenshot-window-icon"></ion-icon>
         <ion-icon name="open-outline" id="open-in-window-icon"></ion-icon>

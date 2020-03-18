@@ -12,7 +12,6 @@ async function main() {
   const screenCapturer = new ScreenCapturer({store});
   let mainWindow = screenCapturer.mainWindow;
 
-
   tray = new Tray('./assets/logo.png');
 
   tray.on('click', toggleWindow);

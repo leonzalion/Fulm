@@ -1,12 +1,10 @@
 const {combineReducers} = require('redux');
-const captureWindow = require('./captureWindow');
+const window = require('./window');
 const recording = require('./recording');
 const settings = require('./settings');
-const saveStatus = require('./saveStatus');
 
 module.exports = combineReducers({
-  captureWindow,
+  window,
   recording,
   settings,
-  saveStatus
 });

@@ -1,6 +1,14 @@
 module.exports = {
-  captureWindow: {
-    isOpen: false,
+  window: {
+    capture: {
+      isOpen: false
+    },
+    settings: {
+      isOpen: false
+    },
+    screenshot: {
+      isOpen: false
+    }
   },
   recording: {
     state: 'INACTIVE'

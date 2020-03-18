@@ -13,8 +13,8 @@ const contextMenu = require('electron-context-menu');
 class ScreenCapturer {
   x = 0;
   y = 0;
-  width = 800;
-  height = 600;
+  width = 400;
+  height = 300;
   screenshotDelay = 2;
   isRecording = false;
   screenshotNumber = 1;
@@ -262,6 +262,8 @@ class ScreenCapturer {
 
     this.saveWindow = new Window({
       file: './renderer/save.html',
+      height: 200,
+      width: 500,
       showOnReady: true
     });
 
