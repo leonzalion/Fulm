@@ -71,8 +71,8 @@ class ScreenCapturer {
         {
           label: "Hide Capture Window",
           click: () => self.store.dispatch({
-            type: 'TOGGLE_CAPTURE_WINDOW',
-            payload: false
+            type: 'HIDE_WINDOW',
+            payload: 'capture'
           })
         },
         {
@@ -164,7 +164,7 @@ class ScreenCapturer {
 
   setupObservers() {
     // watch capture window
-    observeStore(this.store, state => state.captureWindow.isOpen, isOpen => {
+    observeStore(this.store, state => state.window.capture.isOpen, isOpen => {
       if (isOpen) this.captureWindow.show();
       else this.captureWindow.hide();
     });

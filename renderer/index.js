@@ -8,7 +8,7 @@ const hideCaptureWindowIcon = $('#hide-capture-window-icon');
 const startRecordingIcon = $('#start-recording-icon');
 const stopRecordingIcon = $('#stop-recording-icon');
 
-observeStore(store, state => state.captureWindow.isOpen, function(isOpen) {
+observeStore(store, state => state.window.capture.isOpen, function(isOpen) {
   showCaptureWindowIcon.toggleClass('hidden', isOpen);
   hideCaptureWindowIcon.toggleClass('hidden', !isOpen);
 });
@@ -26,13 +26,13 @@ observeStore(store, state => state.recording.state, state => {
 });
 
 showCaptureWindowIcon.click(() => store.dispatch({
-  type: 'TOGGLE_CAPTURE_WINDOW',
-  payload: true
+  type: 'SHOW_WINDOW',
+  payload: 'capture'
 }));
 
 hideCaptureWindowIcon.click(() => store.dispatch({
-  type: 'TOGGLE_CAPTURE_WINDOW',
-  payload: false
+  type: 'HIDE_WINDOW',
+  payload: 'capture'
 }));
 
 startRecordingIcon.click(() => {
