@@ -130,6 +130,11 @@ class ScreenCapturer {
     this.captureWindow.setAlwaysOnTop(true, "pop-up-menu", 1);
     this.captureWindow.setPosition(this.x, this.y);
 
+    ipcMain.on('windowMoving', (e, {mouseX, mouseY}) => {
+      const { x, y } = screen.getCursorScreenPoint();
+      this.captureWindow.setPosition(x - mouseX, y - mouseY)
+    });
+
     const mainWindowOptions = {
       file: './renderer/index.html',
       width: 140,

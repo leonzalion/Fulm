@@ -4,10 +4,8 @@
     <list default="true" id="ecdd984f-84e1-4170-b670-ae5381f54271" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ScreenCapturer.js" beforeDir="false" afterPath="$PROJECT_DIR$/ScreenCapturer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducers/recording.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducers/recording.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducers/window.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducers/window.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/renderer/select-region.css" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/select-region.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/select-region.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/select-region.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +98,7 @@
       <workItem from="1584468979297" duration="4446000" />
       <workItem from="1584549781729" duration="6576000" />
       <workItem from="1584562169285" duration="503000" />
-      <workItem from="1584567336827" duration="3163000" />
+      <workItem from="1584567336827" duration="4568000" />
     </task>
     <servers />
   </component>
