@@ -180,7 +180,7 @@ class ScreenCapturer {
       }
     });
 
-    ipcMain.handle('saveTimeLapse', (savePath) => {
+    ipcMain.handle('saveTimeLapse', (event, savePath) => {
       this.saveRecording(savePath);
     });
 
@@ -273,28 +273,31 @@ class ScreenCapturer {
 
   saveRecording(savePath) {
     // ffmpeg -framerate 24 -i ~/Desktop/WBSScreenshots/$uuid-%08d.jpg $name.mp4
+
     const ffmpeg = spawn(ffmpegPath, [
       '-framerate', '24',
       '-i', `${this.saveDir}/%d.jpg`,
       '-pix_fmt', 'yuv420p',
       savePath
     ]);
+    
+    console.log(savePath);
     ffmpeg.stdout.setEncoding('utf8');
 
-    const self = this;
-    ffmpeg.stderr.on('data', function(data) {
+    ffmpeg.stderr.on('data', (data) => {
+      console.log(data.toString());
       const matches = /frame=\s*(\d+)/g.exec(data);
       if (matches !== null) {
         const percentage = matches[1] / this.numScreenshots * 100;
         console.log(percentage + '%');
-        self.saveWindow.webContents.send('saveProgressUpdate', percentage);
+        this.saveWindow.webContents.send('saveProgressUpdate', percentage);
       }
     });
 
-    ffmpeg.on('exit', function() {
+    ffmpeg.on('exit', () => {
       console.log('Time-lapse saved.');
       ffmpeg.kill('SIGINT');
-      self.saveWindow.close();
+      this.saveWindow.close();
     });
   }
 
