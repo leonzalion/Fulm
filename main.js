@@ -10,7 +10,7 @@ let tray = null;
 
 async function main() {
   const screenCapturer = new ScreenCapturer({store});
-  let mainWindow = screenCapturer.mainWindow;
+  let trayWindow = screenCapturer.trayWindow;
 
   tray = new Tray('./assets/logo.png');
 
@@ -19,18 +19,18 @@ async function main() {
   tray.on('right-click', toggleWindow);
 
   function toggleWindow() {
-    if (mainWindow.isVisible()) mainWindow.hide();
-    else mainWindow.show();
+    if (trayWindow.isVisible()) trayWindow.hide();
+    else trayWindow.show();
   }
 
-  mainWindow.on('close', (e) => {
+  trayWindow.on('close', (e) => {
     if (!willQuitApp) {
       e.preventDefault();
-      mainWindow.hide();
+      trayWindow.hide();
     }
   });
 
-  const windowBounds = mainWindow.getBounds();
+  const windowBounds = trayWindow.getBounds();
   const trayBounds = tray.getBounds();
 
   // Center window horizontally below the tray icon
@@ -48,8 +48,8 @@ async function main() {
       break;
   }
 
-  mainWindow.setBounds({x, y});
-  mainWindow.show();
+  trayWindow.setBounds({x, y});
+  trayWindow.show();
 }
 
 app.on('ready', main);

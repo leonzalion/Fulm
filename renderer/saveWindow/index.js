@@ -7,11 +7,6 @@ const path = require('path');
     $('#save-directory-input-box').val(savePath);
     $("body").fadeIn(1000);
 
-    const progressBar = $('#progress-bar');
-    ipcRenderer.on('saveProgressUpdate', function(event, percent) {
-      progressBar.css('width', `${percent}%`);
-    });
-
     $('#change-save-directory').click(async function () {
       let userSavePath = await ipcRenderer.invoke('selectDirectory');
       if (userSavePath === undefined) return;

@@ -1,7 +1,7 @@
 const $ = require('jquery');
 const {ipcRenderer} = require('electron');
-const observeStore = require('../redux/observeStore');
-const store = require('../redux/createRendererStore')();
+const observeStore = require('../../redux/observeStore');
+const store = require('../../redux/createRendererStore')();
 
 const showCaptureWindowIcon = $('#show-capture-window-icon');
 const hideCaptureWindowIcon = $('#hide-capture-window-icon');

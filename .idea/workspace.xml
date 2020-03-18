@@ -2,10 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ecdd984f-84e1-4170-b670-ae5381f54271" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/renderer/captureWindow/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/renderer/saveProgressWindow/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/renderer/saveProgressWindow/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/renderer/saveProgressWindow/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/renderer/trayWindow/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ScreenCapturer.js" beforeDir="false" afterPath="$PROJECT_DIR$/ScreenCapturer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/select-region.css" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/select-region.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/select-region.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/select-region.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/trayWindow/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/trayWindow/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/save.css" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/saveWindow/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/save.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/saveWindow/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/save.js" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/saveWindow/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/select-region.css" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/captureWindow/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/select-region.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/captureWindow/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/settingsWindow/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/settingsWindow/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +46,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/renderer/captureWindow" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -44,18 +57,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/redux" />
-      <recent name="$PROJECT_DIR$/assets" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/renderer" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/renderer/captureWindow" />
+      <recent name="$PROJECT_DIR$/renderer/trayWindow" />
+      <recent name="$PROJECT_DIR$/renderer" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/redux/reducers" />
-      <recent name="$PROJECT_DIR$/renderer" />
-      <recent name="$PROJECT_DIR$/redux" />
-      <recent name="$PROJECT_DIR$/reducers" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/renderer/settingsWindow" />
+      <recent name="$PROJECT_DIR$/renderer/captureWindow" />
+      <recent name="$PROJECT_DIR$/renderer/trayWindow" />
+      <recent name="$PROJECT_DIR$/renderer/saveWindow" />
+      <recent name="$PROJECT_DIR$/renderer/save-progress" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -98,7 +112,7 @@
       <workItem from="1584468979297" duration="4446000" />
       <workItem from="1584549781729" duration="6576000" />
       <workItem from="1584562169285" duration="503000" />
-      <workItem from="1584567336827" duration="4568000" />
+      <workItem from="1584567336827" duration="6487000" />
     </task>
     <servers />
   </component>
@@ -111,15 +125,15 @@
     </state>
     <state x="612" y="328" key="SettingsEditor/0.23.1680.1027@0.23.1680.1027" timestamp="1584214718066" />
     <state x="933" y="466" key="SettingsEditor/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1584465880101" />
-    <state x="1239" y="396" width="1041" height="671" key="find.popup" timestamp="1584570656693">
+    <state x="1239" y="396" width="1041" height="671" key="find.popup" timestamp="1584573910918">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="813" y="293" width="683" height="486" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1584058955226" />
-    <state x="1239" y="396" width="1041" height="671" key="find.popup/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1584570656693" />
-    <state x="1359" y="336" width="1021" height="933" key="search.everywhere.popup" timestamp="1584556423006">
+    <state x="1239" y="396" width="1041" height="671" key="find.popup/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1584573910918" />
+    <state x="1359" y="336" width="1021" height="933" key="search.everywhere.popup" timestamp="1584573160925">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="892" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1584128359536" />
-    <state x="1359" y="336" width="1021" height="933" key="search.everywhere.popup/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1584556423006" />
+    <state x="1359" y="336" width="1021" height="933" key="search.everywhere.popup/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1584573160925" />
   </component>
 </project>

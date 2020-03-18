@@ -113,7 +113,7 @@ class ScreenCapturer {
 
   setupWindows() {
     this.captureWindow = new Window({
-      file: './renderer/select-region.html',
+      file: './renderer/captureWindow/index.html',
       width: this.width,
       height: this.height,
       transparent: true,
@@ -135,8 +135,8 @@ class ScreenCapturer {
       this.captureWindow.setPosition(x - mouseX, y - mouseY)
     });
 
-    const mainWindowOptions = {
-      file: './renderer/index.html',
+    const trayWindowOptions = {
+      file: './renderer/trayWindow/index.html',
       width: 140,
       height: 85,
       frame: false,
@@ -146,22 +146,22 @@ class ScreenCapturer {
 
     switch (process.platform) {
       case 'darwin':
-        mainWindowOptions.vibrancy = 'menu';
+        trayWindowOptions.vibrancy = 'menu';
         break;
       case 'win32':
-        mainWindowOptions.backgroundColor = '#000';
-        mainWindowOptions.center = true;
-        mainWindowOptions.showOnReady = true;
+        trayWindowOptions.backgroundColor = '#000';
+        trayWindowOptions.center = true;
+        trayWindowOptions.showOnReady = true;
         break;
     }
 
-    this.mainWindow = new Window(mainWindowOptions);
-    this.mainWindow.setAlwaysOnTop(true, "pop-up-menu", 1);
+    this.trayWindow = new Window(trayWindowOptions);
+    this.trayWindow.setAlwaysOnTop(true, "pop-up-menu", 1);
 
 
 
     this.settingsWindow = new Window({
-      file: './renderer/settings.html'
+      file: './renderer/settingsWindow/index.html'
     });
 
 
@@ -178,6 +178,10 @@ class ScreenCapturer {
       switch (state) {
         case 'RECORDING':
           this.startRecording();
+          this.store.dispatch({
+            type: 'HIDE_WINDOW',
+            payload: 'capture'
+          });
           break;
         case 'STOPPED':
           this.stopRecording();
@@ -223,7 +227,7 @@ class ScreenCapturer {
         const image = await Jimp.read(screenshotPath);
         image.crop(self.x, self.y, self.width, self.height).write(screenshotPath);
 
-        self.mainWindow.webContents.send('tookScreenshot', screenshotPath);
+        self.trayWindow.webContents.send('tookScreenshot', screenshotPath);
       }
     }
 
@@ -266,8 +270,8 @@ class ScreenCapturer {
     const videoPath = path.join(this.videoDir, `${dateIdentifier}.mp4`);
 
     this.saveWindow = new Window({
-      file: './renderer/save.html',
-      height: 200,
+      file: './renderer/saveWindow/index.html',
+      height: 75,
       width: 500,
       showOnReady: true
     });
@@ -287,8 +291,14 @@ class ScreenCapturer {
       '-pix_fmt', 'yuv420p',
       savePath
     ]);
-    
-    console.log(savePath);
+
+    this.saveProgressWindow = new Window({
+      file: './renderer/saveProgressWindow/index.html',
+      height: 100,
+      width: 800,
+      showOnReady: true
+    });
+
     ffmpeg.stdout.setEncoding('utf8');
 
     ffmpeg.stderr.on('data', (data) => {
@@ -297,14 +307,14 @@ class ScreenCapturer {
       if (matches !== null) {
         const percentage = matches[1] / this.numScreenshots * 100;
         console.log(percentage + '%');
-        this.saveWindow.webContents.send('saveProgressUpdate', percentage);
+        this.saveProgressWindow.webContents.send('saveProgressUpdate', percentage);
       }
     });
 
     ffmpeg.on('exit', () => {
       console.log('Time-lapse saved.');
       ffmpeg.kill('SIGINT');
-      this.saveWindow.close();
+      this.saveProgressWindow.close();
     });
   }
 
