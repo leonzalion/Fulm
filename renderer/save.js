@@ -1,19 +1,27 @@
 const {ipcRenderer} = require('electron');
 const $ = require('jquery');
-const store = require('../redux/createRendererStore')();
+const path = require('path');
 
-const progressBar = $('#progress-bar');
-ipcRenderer.on('saveProgressUpdate', function(event, percent) {
-  progressBar.css('width', `${percent}%`);
-});
+(async() => {
+  ipcRenderer.on('savePath', function(event, savePath) {
+    $('#save-directory-input-box').val(savePath);
+    $("body").fadeIn(1000);
 
-let saveDirectory = store.getState().settings.defaultSavePath;
-$('#save-directory').html(saveDirectory);
+    const progressBar = $('#progress-bar');
+    ipcRenderer.on('saveProgressUpdate', function(event, percent) {
+      progressBar.css('width', `${percent}%`);
+    });
 
-$('#change-save-directory').click(function() {
-  const newDirectory = ipcRenderer.invoke('saveDirectory');
-  if (newDirectory !== undefined) {
-    saveDirectory = newDirectory;
-    $('#save-directory').html(newDirectory);
-  }
-});
+    $('#change-save-directory').click(async function () {
+      let userSavePath = await ipcRenderer.invoke('selectDirectory');
+      if (userSavePath === undefined) return;
+      if (path.extname(userSavePath) !== '.mp4') userSavePath += '.mp4';
+      savePath = userSavePath;
+      $('#save-directory-input-box').val(savePath);
+    });
+
+    $('#save-time-lapse').click(async function () {
+      await ipcRenderer.invoke('saveTimeLapse', savePath);
+    });
+  });
+})();

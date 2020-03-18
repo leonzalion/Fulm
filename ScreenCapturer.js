@@ -45,8 +45,6 @@ class ScreenCapturer {
   };
 
   debug() {
-    //this.mainWindow.webContents.openDevTools({mode: 'detach'});
-    //this.saveWindow.webContents.openDevTools({mode: 'detach'});
   }
 
   setupPaths() {
@@ -151,16 +149,17 @@ class ScreenCapturer {
         mainWindowOptions.showOnReady = true;
         break;
     }
+
     this.mainWindow = new Window(mainWindowOptions);
     this.mainWindow.setAlwaysOnTop(true, "pop-up-menu", 1);
 
-    this.saveWindow = new Window({
-      file: './renderer/save.html',
-    });
+
 
     this.settingsWindow = new Window({
       file: './renderer/settings.html'
     });
+
+
   }
 
   setupObservers() {
@@ -181,43 +180,23 @@ class ScreenCapturer {
       }
     });
 
+    ipcMain.handle('saveTimeLapse', (savePath) => {
+      this.saveRecording(savePath);
+    });
+
     ipcMain.handle('selectDirectory', () => {
-      return dialog.showOpenDialogSync({
-        properties: ["openDirectory", "createDirectory"]
+      return dialog.showSaveDialogSync(this.saveWindow, {
+        filters: [
+          {name: 'Movies', extensions: ['mp4']}
+        ],
+        defaultPath: '~/Untitled.mp4',
+        properties: ["createDirectory"]
       });
     });
+
   }
 
-  saveRecording() {
-    const numScreenshots = this.numScreenshots;
 
-    const dateIdentifier = dateFormat(new Date(), "yyyy-mm-dd'T'HH-MM-ss");
-    const videoPath = path.join(this.videoDir, `${dateIdentifier}.mp4`);
-
-    // ffmpeg -framerate 24 -i ~/Desktop/WBSScreenshots/$uuid-%08d.jpg $name.mp4
-    const ffmpeg = spawn(ffmpegPath, [
-      '-framerate', '24',
-      '-i', `${this.saveDir}/%d.jpg`,
-      '-pix_fmt', 'yuv420p',
-      videoPath
-    ]);
-    ffmpeg.stdout.setEncoding('utf8');
-
-    const self = this;
-    ffmpeg.stderr.on('data', function(data) {
-      const matches = /frame=\s*(\d+)/g.exec(data);
-      if (matches !== null) {
-        const percentage = matches[1] / numScreenshots * 100;
-        console.log(percentage + '%');
-        self.saveWindow.send('saveProgressUpdate', percentage);
-      }
-    });
-
-    ffmpeg.on('exit', function() {
-      console.log('Time-lapse saved.');
-      self.saveWindow.close();
-    });
-  }
 
   startRecording() {
     this.save();
@@ -239,7 +218,7 @@ class ScreenCapturer {
         const image = await Jimp.read(screenshotPath);
         image.crop(self.x, self.y, self.width, self.height).write(screenshotPath);
 
-        self.mainWindow.send('tookScreenshot', screenshotPath);
+        self.mainWindow.webContents.send('tookScreenshot', screenshotPath);
       }
     }
 
@@ -277,9 +256,51 @@ class ScreenCapturer {
     this.screenshotNumber = 1;
     this.unlockRecordingScreen();
     this.captureWindow.hide();
-    this.saveWindow.show();
+
+    const dateIdentifier = dateFormat(new Date(), "yyyy-mm-dd'T'HH-MM-ss");
+    const videoPath = path.join(this.videoDir, `${dateIdentifier}.mp4`);
+
+    this.saveWindow = new Window({
+      file: './renderer/save.html',
+      showOnReady: true
+    });
+
+    this.saveWindow.on("ready-to-show", () => {
+      this.saveWindow.webContents.send('savePath', videoPath);
+    });
+
   }
 
+  saveRecording(savePath) {
+    // ffmpeg -framerate 24 -i ~/Desktop/WBSScreenshots/$uuid-%08d.jpg $name.mp4
+    const ffmpeg = spawn(ffmpegPath, [
+      '-framerate', '24',
+      '-i', `${this.saveDir}/%d.jpg`,
+      '-pix_fmt', 'yuv420p',
+      savePath
+    ]);
+    ffmpeg.stdout.setEncoding('utf8');
+
+    const self = this;
+    ffmpeg.stderr.on('data', function(data) {
+      const matches = /frame=\s*(\d+)/g.exec(data);
+      if (matches !== null) {
+        const percentage = matches[1] / this.numScreenshots * 100;
+        console.log(percentage + '%');
+        self.saveWindow.webContents.send('saveProgressUpdate', percentage);
+      }
+    });
+
+    ffmpeg.on('exit', function() {
+      console.log('Time-lapse saved.');
+      ffmpeg.kill('SIGINT');
+      self.saveWindow.close();
+    });
+  }
+
+  openSettings() {
+
+  }
 
 }
 

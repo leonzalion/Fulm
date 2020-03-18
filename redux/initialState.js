@@ -9,9 +9,5 @@ module.exports = {
     defaultSavePath: '',
     screenshotDelay: 30,
   },
-  saveStatus: {
-    path: '',
-    progress: 0
-  }
 };
 

@@ -12,6 +12,7 @@ async function main() {
   const screenCapturer = new ScreenCapturer({store});
   let mainWindow = screenCapturer.mainWindow;
 
+
   tray = new Tray('./assets/logo.png');
 
   tray.on('click', toggleWindow);
@@ -38,9 +39,17 @@ async function main() {
     - (windowBounds.width / 2));
 
   // Position window 4 pixels vertically below the tray icon
-  const y = Math.round(trayBounds.y + trayBounds.height + 4);
+  let y;
+  switch (process.platform) {
+    case "win32":
+      y = Math.round(trayBounds.y - windowBounds.height - 4);
+      break;
+    case "darwin":
+      y = Math.round(trayBounds.y + trayBounds.height + 4);
+      break;
+  }
 
-  // mainWindow.setBounds({x, y});
+  mainWindow.setBounds({x, y});
   mainWindow.show();
 }
 
