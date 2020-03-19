@@ -16,7 +16,7 @@ const path = require('path');
       $('#save-directory-input-box').val(savePath);
     });
 
-    $('#save-time-lapse').click(async function () {
+    $('#save-icon').click(async function () {
       await ipcRenderer.invoke('saveTimeLapse', savePath);
     });
   });

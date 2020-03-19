@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ecdd984f-84e1-4170-b670-ae5381f54271" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScreenCapturer.js" beforeDir="false" afterPath="$PROJECT_DIR$/ScreenCapturer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/saveWindow/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/saveWindow/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/saveWindow/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/saveWindow/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/renderer/saveWindow/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/saveWindow/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +99,7 @@
       <workItem from="1584567336827" duration="10657000" />
       <workItem from="1584581406383" duration="2807000" />
       <workItem from="1584587325420" duration="40000" />
-      <workItem from="1584587432281" duration="4106000" />
+      <workItem from="1584587432281" duration="4333000" />
     </task>
     <servers />
   </component>
