@@ -3,7 +3,7 @@
 const {app, ipcMain, Menu, Tray} = require('electron');
 const ScreenCapturer = require('./ScreenCapturer');
 const store = require('./redux/createMainStore')();
-const {menubar} = require('menubar');
+const path = require('path');
 
 app.allowRendererProcessReuse = true;
 let willQuitApp = false;
@@ -11,46 +11,8 @@ let tray = null;
 
 async function main() {
   const screenCapturer = new ScreenCapturer({store});
-  let trayWindow = screenCapturer.trayWindow;
 
-  tray = new Tray('./assets/logo.png');
 
-  tray.on('click', toggleWindow);
-  tray.on('double-click', toggleWindow);
-  tray.on('right-click', toggleWindow);
-
-  function toggleWindow() {
-    if (trayWindow.isVisible()) trayWindow.hide();
-    else trayWindow.show();
-  }
-
-  trayWindow.on('close', (e) => {
-    if (!willQuitApp) {
-      e.preventDefault();
-      trayWindow.hide();
-    }
-  });
-
-  const windowBounds = trayWindow.getBounds();
-  const trayBounds = tray.getBounds();
-
-  // Center window horizontally below the tray icon
-  const x = Math.round(trayBounds.x + (trayBounds.width / 2)
-    - (windowBounds.width / 2));
-
-  // Position window 4 pixels vertically below the tray icon
-  let y;
-  switch (process.platform) {
-    case "win32":
-      y = Math.round(trayBounds.y - windowBounds.height - 4);
-      break;
-    case "darwin":
-      y = Math.round(trayBounds.y + trayBounds.height + 4);
-      break;
-  }
-
-  trayWindow.setBounds({x, y});
-  trayWindow.show();
 }
 
 app.on('ready', main);

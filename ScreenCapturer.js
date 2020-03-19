@@ -3,12 +3,13 @@ const Window = require('./Window');
 const path = require('path');
 const fs = require('fs');
 const Jimp = require('jimp');
-const {app, Menu, screen, ipcMain, dialog} = require('electron');
+const {app, Menu, screen, ipcMain, dialog, Tray} = require('electron');
 const dateFormat = require('dateformat');
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 const spawn = require('child_process').spawn;
 const observeStore = require('./redux/observeStore');
 const contextMenu = require('electron-context-menu');
+const {menubar} = require('menubar');
 
 class ScreenCapturer {
   x = 0;
@@ -112,29 +113,6 @@ class ScreenCapturer {
   }
 
   setupWindows() {
-    this.captureWindow = new Window({
-      file: './renderer/captureWindow/index.html',
-      width: this.width,
-      height: this.height,
-      transparent: true,
-      frame: false,
-      backgroundColor: '#10FFFFFF',
-      enableLargerThanScreen: true,
-      resizable: true,
-      webPreferences: {
-        nodeIntegration: true
-      }
-    });
-    this.captureWindow.excludedFromShownWindowsMenu = true;
-    this.captureWindow.setBounds({x: 0, y: 0});
-    this.captureWindow.setAlwaysOnTop(true, "pop-up-menu", 1);
-    this.captureWindow.setPosition(this.x, this.y);
-
-    ipcMain.on('windowMoving', (e, {mouseX, mouseY}) => {
-      const { x, y } = screen.getCursorScreenPoint();
-      this.captureWindow.setPosition(x - mouseX, y - mouseY)
-    });
-
     const trayWindowOptions = {
       file: './renderer/trayWindow/index.html',
       width: 140,
@@ -142,6 +120,9 @@ class ScreenCapturer {
       frame: false,
       resizable: false,
       acceptFirstMouse: true,
+      webPreferences: {
+        nodeIntegration: true
+      }
     };
 
     switch (process.platform) {
@@ -155,23 +136,78 @@ class ScreenCapturer {
         break;
     }
 
-    this.trayWindow = new Window(trayWindowOptions);
-    this.trayWindow.setAlwaysOnTop(true, "pop-up-menu", 1);
+    const trayWindowPath = path.join(app.getAppPath(), 'renderer/trayWindow/index.html');
 
-
-
-    this.settingsWindow = new Window({
-      file: './renderer/settingsWindow/index.html'
+    const tray = new Tray('./assets/logo.png');
+    const mb = menubar({
+      browserWindow: trayWindowOptions,
+      index: `file://${trayWindowPath}`,
+      preloadWindow: true,
+      tray: tray
     });
 
+    mb.on('after-create-window', () => {
+      this.trayWindow = mb.window;
+      mb.window.setAlwaysOnTop(true, "pop-up-menu", 1);
+    });
+  }
 
+  openSettingsWindow() {
+    if (this.settingsWindow) {
+      this.settingsWindow.show();
+      return;
+    }
+
+    this.settingsWindow = new Window({
+      file: './renderer/settingsWindow/index.html',
+      showOnReady: true
+    });
+
+    this.settingsWindow.on('closed', () => {
+      this.settingsWindow = null;
+    });
+  }
+
+  openCaptureWindow() {
+    if (this.captureWindow) {
+      this.captureWindow.show();
+      return;
+    }
+
+    this.captureWindow = new Window({
+      file: './renderer/captureWindow/index.html',
+      width: this.width,
+      height: this.height,
+      transparent: true,
+      frame: false,
+      backgroundColor: '#10FFFFFF',
+      enableLargerThanScreen: true,
+      resizable: true,
+      showOnReady: true,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    });
+    this.captureWindow.excludedFromShownWindowsMenu = true;
+    this.captureWindow.setBounds({x: 0, y: 0});
+    this.captureWindow.setAlwaysOnTop(true, "pop-up-menu", 1);
+    this.captureWindow.setPosition(this.x, this.y);
+
+    this.captureWindow.on('closed', () => {
+      this.captureWindow = null;
+    });
   }
 
   setupObservers() {
     // watch capture window
     observeStore(this.store, state => state.window.capture.isOpen, isOpen => {
-      if (isOpen) this.captureWindow.show();
-      else this.captureWindow.hide();
+      if (isOpen) this.openCaptureWindow();
+      else if (this.captureWindow) this.captureWindow.hide();
+    });
+
+    observeStore(this.store, state => state.window.settings.isOpen, isOpen => {
+      if (isOpen) this.openSettingsWindow();
+      else if (this.settingsWindow) this.settingsWindow.hide();
     });
 
     observeStore(this.store, state => state.recording.state, state => {
@@ -201,6 +237,11 @@ class ScreenCapturer {
         defaultPath: '~/Untitled.mp4',
         properties: ["createDirectory"]
       });
+    });
+
+    ipcMain.on('windowMoving', (e, {mouseX, mouseY}) => {
+      const { x, y } = screen.getCursorScreenPoint();
+      this.captureWindow.setPosition(x - mouseX, y - mouseY)
     });
 
   }

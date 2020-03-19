@@ -27,7 +27,7 @@ ion-icon:hover {
 
 #hide-capture-window-icon, #show-capture-window-icon,
 #open-in-window-icon, #open-recent-screenshot-window-icon,
-#settings-icon {
+#show-settings-window-icon, #hide-settings-window-icon {
   font-size: 24px;
 }
 
@@ -41,7 +41,7 @@ ion-icon:hover {
   display: none;
 }
 
-#show-settings-icon, #hide-capture-window-icon {
+#show-settings-window-icon, #hide-settings-window-icon {
   grid-area: 1 / 2 / span 1 / span 1;
 }
 
@@ -49,7 +49,7 @@ ion-icon:hover {
   grid-area: 2 / 2 / span 1 / span 1;
 }
 
-#hide-capture-window-icon, #hide-settings-icon {
+#hide-capture-window-icon, #hide-settings-window-icon {
   --ionicon-stroke-width: 72px;
 }
 

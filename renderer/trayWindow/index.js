@@ -7,11 +7,19 @@ const showCaptureWindowIcon = $('#show-capture-window-icon');
 const hideCaptureWindowIcon = $('#hide-capture-window-icon');
 const startRecordingIcon = $('#start-recording-icon');
 const stopRecordingIcon = $('#stop-recording-icon');
+const showSettingsWindowIcon = $('#show-settings-window-icon');
+const hideSettingsWindowIcon = $('#hide-settings-window-icon');
 
 observeStore(store, state => state.window.capture.isOpen, function(isOpen) {
   showCaptureWindowIcon.toggleClass('hidden', isOpen);
   hideCaptureWindowIcon.toggleClass('hidden', !isOpen);
 });
+
+observeStore(store, state => state.window.settings.isOpen, function(isOpen) {
+  showSettingsWindowIcon.toggleClass('hidden', isOpen);
+  hideSettingsWindowIcon.toggleClass('hidden', !isOpen);
+});
+
 
 observeStore(store, state => state.recording.state, state => {
   switch (state) {
@@ -26,13 +34,23 @@ observeStore(store, state => state.recording.state, state => {
 });
 
 showCaptureWindowIcon.click(() => store.dispatch({
-  type: 'SHOW_WINDOW',
-  payload: 'capture'
+    type: 'SHOW_WINDOW',
+    payload: 'capture'
 }));
 
 hideCaptureWindowIcon.click(() => store.dispatch({
   type: 'HIDE_WINDOW',
   payload: 'capture'
+}));
+
+showSettingsWindowIcon.click(() => store.dispatch({
+  type: 'SHOW_WINDOW',
+  payload: 'settings'
+}));
+
+hideSettingsWindowIcon.click(() => store.dispatch({
+  type: 'HIDE_WINDOW',
+  payload: 'settings'
 }));
 
 startRecordingIcon.click(() => {
@@ -51,3 +69,4 @@ ipcRenderer.on('tookScreenshot', function(event, imgPath) {
   console.log(imgPath);
   $('#most-recent-screenshot').attr('src', imgPath);
 });
+
