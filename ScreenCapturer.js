@@ -10,6 +10,7 @@ const spawn = require('child_process').spawn;
 const observeStore = require('./redux/observeStore');
 const contextMenu = require('electron-context-menu');
 const {menubar} = require('menubar');
+const rimraf = require('rimraf');
 
 class ScreenCapturer {
   x = 0;
@@ -19,6 +20,7 @@ class ScreenCapturer {
   screenshotDelay = 2;
   isRecording = false;
   screenshotNumber = 1;
+  showSaveWindowExitPrompt = true;
 
   constructor({
     store,
@@ -280,7 +282,7 @@ class ScreenCapturer {
   async takeScreenshot() {
     if (this.isRecording) {
       console.log('screenshot no.' + this.screenshotNumber);
-      const screenshotPath = path.join(this.saveDir, `${this.screenshotNumber++}.jpg`);
+      const screenshotPath = path.join(this.screenshotSaveDir, `${this.screenshotNumber++}.jpg`);
       await screenshot({
         screen: this.captureDisplayId,
         filename: screenshotPath
@@ -298,8 +300,8 @@ class ScreenCapturer {
     this.save();
 
     const dateIdentifier = dateFormat(new Date(), "yyyy-mm-dd'T'HH-MM-ss");
-    this.saveDir = path.join(this.screenshotDir, dateIdentifier);
-    fs.mkdirSync(this.saveDir);
+    this.screenshotSaveDir = path.join(this.screenshotDir, dateIdentifier);
+    fs.mkdirSync(this.screenshotSaveDir);
     this.lockRecordingScreen();
 
     this.resumeRecording();
@@ -374,6 +376,28 @@ class ScreenCapturer {
     }
 
     this.saveWindow = new Window(saveWindowOptions);
+    let saveWindowExitPrompt = this.showSaveWindowExitPrompt;
+
+    this.saveWindow.on('close', async (e) => {
+      if (saveWindowExitPrompt) {
+        e.preventDefault();
+        const messageBox = await dialog.showMessageBox({
+          type: 'question',
+          buttons: ['Yes', 'No', 'Cancel'],
+          title: 'Confirm',
+          message: `Should I delete this session's screenshots (located at "${this.screenshotSaveDir}")?`
+        });
+        if (messageBox.response === 0 || messageBox.response === 1) {
+          saveWindowExitPrompt = false;
+          this.saveWindow.close();
+          if (messageBox.response === 0) {
+            rimraf(this.screenshotSaveDir, () => {
+              console.log(`Deleted ${this.screenshotSaveDir}.`);
+            });
+          }
+        }
+      }
+    });
 
     this.saveWindow.on("ready-to-show", () => {
       this.saveWindow.webContents.send('savePath', videoPath);
@@ -391,7 +415,7 @@ class ScreenCapturer {
 
     const ffmpeg = spawn(ffmpegPath, [
       '-framerate', '24',
-      '-i', `${this.saveDir}/%d.jpg`,
+      '-i', `${this.screenshotSaveDir}/%d.jpg`,
       '-pix_fmt', 'yuv420p',
       '-vf', scaleString,
       savePath
