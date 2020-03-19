@@ -12,7 +12,6 @@ let tray = null;
 async function main() {
   const screenCapturer = new ScreenCapturer({store});
 
-
 }
 
 app.on('ready', main);

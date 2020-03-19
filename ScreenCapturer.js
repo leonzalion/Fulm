@@ -143,12 +143,26 @@ class ScreenCapturer {
       preloadWindow: true,
       tray: tray
     });
+    this.menubar = mb;
 
     mb.on('after-create-window', async () => {
+
       this.trayWindow = mb.window;
       mb.window.setAlwaysOnTop(true, "pop-up-menu", 1);
       await mb.showWindow();
     });
+
+    mb.on('ready', () => {
+      mb.tray.on('click', () => {
+        if (this.isRecording) {
+          this.store.dispatch({
+            type: 'CHANGE_RECORDING_STATE',
+            payload: 'PAUSED'
+          });
+        }
+      });
+    });
+
 
     this.openCaptureWindow(false);
   }
@@ -220,10 +234,17 @@ class ScreenCapturer {
       switch (state) {
         case 'RECORDING':
           this.startRecording();
+          this.menubar.tray.setImage('./assets/pause-icon.png');
           this.store.dispatch({
             type: 'HIDE_WINDOW',
             payload: 'capture'
           });
+          break;
+        case 'PAUSED':
+          this.pauseRecording();
+          break;
+        case 'RESUMED':
+          this.resumeRecording();
           break;
         case 'STOPPED':
           this.stopRecording();
@@ -250,9 +271,28 @@ class ScreenCapturer {
       this.captureWindow.setPosition(x - mouseX, y - mouseY)
     });
 
+
+
   }
 
 
+
+  async takeScreenshot() {
+    if (this.isRecording) {
+      console.log('screenshot no.' + this.screenshotNumber);
+      const screenshotPath = path.join(this.saveDir, `${this.screenshotNumber++}.jpg`);
+      await screenshot({
+        screen: this.captureDisplayId,
+        filename: screenshotPath
+      });
+
+      // editing screenshot
+      const image = await Jimp.read(screenshotPath);
+      image.crop(this.x, this.y, this.width, this.height).write(screenshotPath);
+
+      this.trayWindow.webContents.send('tookScreenshot', screenshotPath);
+    }
+  }
 
   startRecording() {
     this.save();
@@ -260,27 +300,26 @@ class ScreenCapturer {
     const dateIdentifier = dateFormat(new Date(), "yyyy-mm-dd'T'HH-MM-ss");
     this.saveDir = path.join(this.screenshotDir, dateIdentifier);
     fs.mkdirSync(this.saveDir);
-
     this.lockRecordingScreen();
+
+    this.resumeRecording();
+  }
+
+  resumeRecording() {
     this.trayWindow.hide();
+    this.menubar.tray.setImage('./assets/pause-icon.png');
 
-    const self = this;
     this.isRecording = true;
-    async function takeScreenshot() {
-      if (self.isRecording) {
-        const screenshotPath = path.join(self.saveDir, `${self.screenshotNumber++}.jpg`);
-        await screenshot({screen: self.captureDisplayId, filename: screenshotPath});
+    (async () => await this.takeScreenshot())();
+    this.recordingIntervalId = setInterval(async () => {
+      await this.takeScreenshot();
+    }, this.screenshotDelay * 1000);
+  }
 
-        // editing screenshot
-        const image = await Jimp.read(screenshotPath);
-        image.crop(self.x, self.y, self.width, self.height).write(screenshotPath);
-
-        self.trayWindow.webContents.send('tookScreenshot', screenshotPath);
-      }
-    }
-
-    (async () => await takeScreenshot())();
-    this.recordingIntervalId = setInterval(takeScreenshot,this.screenshotDelay * 1000);
+  pauseRecording() {
+    this.menubar.tray.setImage('./assets/logo.png');
+    this.isRecording = false;
+    clearInterval(this.recordingIntervalId);
   }
 
   save() {
@@ -319,10 +358,10 @@ class ScreenCapturer {
 
     let saveWindowOptions = {
       file: './renderer/saveWindow/index.html',
-      height: 72,
+      height: 132,
       width: 500,
       showOnReady: true,
-      frame: false
+      titleBarStyle: 'hidden'
     };
 
     switch (process.platform) {

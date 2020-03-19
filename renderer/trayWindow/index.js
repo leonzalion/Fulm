@@ -7,6 +7,7 @@ const showCaptureWindowIcon = $('#show-capture-window-icon');
 const hideCaptureWindowIcon = $('#hide-capture-window-icon');
 const startRecordingIcon = $('#start-recording-icon');
 const stopRecordingIcon = $('#stop-recording-icon');
+const resumeRecordingIcon = $('#resume-recording-icon');
 const showSettingsWindowIcon = $('#show-settings-window-icon');
 const hideSettingsWindowIcon = $('#hide-settings-window-icon');
 
@@ -24,12 +25,16 @@ observeStore(store, state => state.window.settings.isOpen, function(isOpen) {
 observeStore(store, state => state.recording.state, state => {
   switch (state) {
     case 'RECORDING':
-      stopRecordingIcon.show();
-      startRecordingIcon.hide();
+    case 'RESUMED':
+    case 'PAUSED':
+      stopRecordingIcon.removeClass('hidden');
+      resumeRecordingIcon.removeClass('hidden');
+      startRecordingIcon.addClass('hidden');
       break;
     case 'STOPPED':
-      stopRecordingIcon.hide();
-      startRecordingIcon.show();
+      stopRecordingIcon.addClass('hidden');
+      resumeRecordingIcon.addClass('hidden');
+      startRecordingIcon.removeClass('hidden');
   }
 });
 
@@ -63,6 +68,11 @@ startRecordingIcon.click(() => {
 stopRecordingIcon.click(() => store.dispatch({
   type: 'CHANGE_RECORDING_STATE',
   payload: 'STOPPED'
+}));
+
+resumeRecordingIcon.click(() => store.dispatch({
+  type: 'CHANGE_RECORDING_STATE',
+  payload: 'RESUMED'
 }));
 
 ipcRenderer.on('tookScreenshot', function(event, imgPath) {
