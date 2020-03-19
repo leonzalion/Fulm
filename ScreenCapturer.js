@@ -3,20 +3,17 @@ const Window = require('./Window');
 const path = require('path');
 const fs = require('fs');
 const Jimp = require('jimp');
-const {app, Menu, screen, ipcMain, dialog, Tray} = require('electron');
+const {app, ipcMain, dialog} = require('electron');
 const dateFormat = require('dateformat');
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 const spawn = require('child_process').spawn;
 const observeStore = require('./redux/observeStore');
-const contextMenu = require('electron-context-menu');
-const {menubar} = require('menubar');
 const rimraf = require('rimraf');
+const TrayWindow = require('./windows/tray');
+const CaptureWindow = require('./windows/capture');
+const SettingsWindow = require('./windows/settings');
 
 class ScreenCapturer {
-  x = 0;
-  y = 0;
-  width = 400;
-  height = 300;
   screenshotDelay = 2;
   isRecording = false;
   screenshotNumber = 1;
@@ -24,28 +21,19 @@ class ScreenCapturer {
 
   constructor({
     store,
-    x = this.x,
-    y = this.y,
-    width = this.width,
-    height = this.height,
     screenshotDelay = this.screenshotDelay
   } = {}) {
     this.store = store;
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
     this.screenshotDelay = screenshotDelay;
-    this.displays = screen.getAllDisplays();
-    this.captureDisplayId = 0;
-    this.captureDisplay = this.displays[0];
 
     this.setupPaths();
-    this.setupWindows();
-    this.setupMenu();
     this.setupObservers();
     this.debug();
   };
+
+  async init() {
+    await this.setupWindows();
+  }
 
   debug() {
   }
@@ -59,184 +47,31 @@ class ScreenCapturer {
     this.screenshotDir = defaultScreenshotDir;
   }
 
-  setupMenu() {
-    const self = this;
-    contextMenu({
-      showInspectElement: false,
-      prepend: (defaultActions, params, browserWindow) => [
-        {
-          label: "Start Capture",
-          click: () => self.store.dispatch({
-            type: 'CHANGE_RECORDING_STATE',
-            payload: 'RECORDING'
-          })
-        },
-        {
-          label: "Hide Capture Window",
-          click: () => self.store.dispatch({
-            type: 'HIDE_WINDOW',
-            payload: 'capture'
-          })
-        },
-        {
-          label: "Snap to Top-Left",
-          click: function() {
-            self.captureWindow.setBounds({x: 0, y: 0});
-          }
-        },
-        {
-          label: "Display to Capture",
-          submenu: self.displays.map(function(display, i) {
-            return {
-              type: 'radio',
-              checked: i === 0,
-              label: `Display ${i}: ${display.size.width}x${display.size.height}`,
-              click: function() {
-                self.captureDisplay = display;
-                self.captureDisplayId = i;
-              }
-            };
-          })
-        },
-        {
-          label: "Fit to Screen",
-          click: function() {
-            self.captureWindow.setBounds(self.captureDisplay.bounds);
-          }
-        },
-        {
-          label: "Hide Border when Recording",
-          click: function() {
-          }
-        }
-      ],
-      window: self.captureWindow
-    });
-  }
+  async setupWindows() {
+    this.trayWindow = new TrayWindow(this.store);
+    await this.trayWindow.init();
 
-  setupWindows() {
-    let trayWindowOptions = {
-      file: './renderer/trayWindow/index.html',
-      width: 140,
-      height: 85,
-      frame: false,
-      resizable: false,
-      acceptFirstMouse: true,
-      webPreferences: {
-        nodeIntegration: true
-      }
-    };
-
-    switch (process.platform) {
-      case 'darwin':
-        trayWindowOptions.vibrancy = 'menu';
-        break;
-      case 'win32':
-        trayWindowOptions.backgroundColor = '#000';
-        break;
-    }
-
-    const trayWindowPath = path.join(app.getAppPath(), 'renderer/trayWindow/index.html');
-
-    const tray = new Tray('./assets/logo.png');
-    const mb = menubar({
-      browserWindow: trayWindowOptions,
-      index: `file://${trayWindowPath}`,
-      preloadWindow: true,
-      tray: tray
-    });
-    this.menubar = mb;
-
-    mb.on('after-create-window', async () => {
-
-      this.trayWindow = mb.window;
-      mb.window.setAlwaysOnTop(true, "pop-up-menu", 1);
-      await mb.showWindow();
-    });
-
-    mb.on('ready', () => {
-      mb.tray.on('click', () => {
-        if (this.isRecording) {
-          this.store.dispatch({
-            type: 'CHANGE_RECORDING_STATE',
-            payload: 'PAUSED'
-          });
-        }
-      });
-    });
-
-
-    this.openCaptureWindow(false);
-  }
-
-
-  openSettingsWindow(shouldShow = true) {
-    if (this.settingsWindow) {
-      this.settingsWindow.show();
-      return;
-    }
-
-    let settingsWindowOptions = {
-      file: './renderer/settingsWindow/index.html',
-      showOnReady: shouldShow,
-      titleBarStyle: 'hidden',
-    };
-
-
-    this.settingsWindow = new Window(settingsWindowOptions);
-
-    this.settingsWindow.on('closed', () => {
-      this.settingsWindow = null;
-    });
-  }
-
-  openCaptureWindow(shouldShow = true) {
-    if (this.captureWindow) {
-      this.captureWindow.show();
-      return;
-    }
-
-    this.captureWindow = new Window({
-      file: './renderer/captureWindow/index.html',
-      width: this.width,
-      height: this.height,
-      transparent: true,
-      frame: false,
-      backgroundColor: '#10FFFFFF',
-      enableLargerThanScreen: true,
-      resizable: true,
-      showOnReady: shouldShow,
-      webPreferences: {
-        nodeIntegration: true
+    this.trayWindow.menubar.tray.on('click', () => {
+      if (this.isRecording) {
+        this.store.dispatch({
+          type: 'CHANGE_RECORDING_STATE',
+          payload: 'PAUSED'
+        });
       }
     });
-    this.captureWindow.excludedFromShownWindowsMenu = true;
-    this.captureWindow.setBounds({x: 0, y: 0});
-    this.captureWindow.setAlwaysOnTop(true, "pop-up-menu", 1);
-    this.captureWindow.setPosition(this.x, this.y);
 
-    this.captureWindow.on('closed', () => {
-      this.captureWindow = null;
-    });
+    this.captureWindow = new CaptureWindow(this.store);
+    await this.captureWindow.init();
+
+    this.settingsWindow = new SettingsWindow(this.store);
   }
 
   setupObservers() {
-    // watch capture window
-    observeStore(this.store, state => state.window.capture.isOpen, isOpen => {
-      if (isOpen) this.openCaptureWindow();
-      else if (this.captureWindow) this.captureWindow.hide();
-    });
-
-    observeStore(this.store, state => state.window.settings.isOpen, isOpen => {
-      if (isOpen) this.openSettingsWindow();
-      else if (this.settingsWindow) this.settingsWindow.hide();
-    });
-
     observeStore(this.store, state => state.recording.state, state => {
       switch (state) {
         case 'RECORDING':
           this.startRecording();
-          this.menubar.tray.setImage('./assets/pause-icon.png');
+          this.trayWindow.menubar.tray.setImage('./assets/pause-icon.png');
           this.store.dispatch({
             type: 'HIDE_WINDOW',
             payload: 'capture'
@@ -268,10 +103,7 @@ class ScreenCapturer {
       });
     });
 
-    ipcMain.on('windowMoving', (e, {mouseX, mouseY}) => {
-      const { x, y } = screen.getCursorScreenPoint();
-      this.captureWindow.setPosition(x - mouseX, y - mouseY)
-    });
+
 
 
 
@@ -280,36 +112,37 @@ class ScreenCapturer {
 
 
   async takeScreenshot() {
+    const {x, y, width, height} = this.captureWindow;
     if (this.isRecording) {
       console.log('screenshot no.' + this.screenshotNumber);
       const screenshotPath = path.join(this.screenshotSaveDir, `${this.screenshotNumber++}.jpg`);
       await screenshot({
-        screen: this.captureDisplayId,
+        screen: this.captureWindow.captureDisplayId,
         filename: screenshotPath
       });
 
       // editing screenshot
       const image = await Jimp.read(screenshotPath);
-      image.crop(this.x, this.y, this.width, this.height).write(screenshotPath);
+      image.crop(x, y, width, height).write(screenshotPath);
 
-      this.trayWindow.webContents.send('tookScreenshot', screenshotPath);
+      this.trayWindow.window.webContents.send('tookScreenshot', screenshotPath);
     }
   }
 
   startRecording() {
-    this.save();
+    this.captureWindow.save();
 
     const dateIdentifier = dateFormat(new Date(), "yyyy-mm-dd'T'HH-MM-ss");
     this.screenshotSaveDir = path.join(this.screenshotDir, dateIdentifier);
     fs.mkdirSync(this.screenshotSaveDir);
-    this.lockRecordingScreen();
+    this.captureWindow.lock();
 
     this.resumeRecording();
   }
 
   resumeRecording() {
-    this.trayWindow.hide();
-    this.menubar.tray.setImage('./assets/pause-icon.png');
+    this.trayWindow.window.hide();
+    this.trayWindow.menubar.tray.setImage('./assets/pause-icon.png');
 
     this.isRecording = true;
     (async () => await this.takeScreenshot())();
@@ -319,41 +152,17 @@ class ScreenCapturer {
   }
 
   pauseRecording() {
-    this.menubar.tray.setImage('./assets/logo.png');
+    this.trayWindow.menubar.tray.setImage('./assets/logo.png');
     this.isRecording = false;
     clearInterval(this.recordingIntervalId);
-  }
-
-  save() {
-    [this.width, this.height] = this.captureWindow.getSize();
-    [this.x, this.y] = this.captureWindow.getPosition();
-  }
-
-  lockRecordingScreen() {
-    this.captureWindow.setIgnoreMouseEvents(true);
-    this.captureWindow.setBackgroundColor('#00FFFFFF');
-    this.captureWindow.setAlwaysOnTop(true);
-    this.captureWindow.closable = false;
-    this.captureWindow.minimizable = false;
-    this.captureWindow.setHasShadow(false);
-  }
-
-  unlockRecordingScreen() {
-    this.captureWindow.setIgnoreMouseEvents(false);
-    this.captureWindow.setBackgroundColor('#10FFFFFF');
-    this.captureWindow.setAlwaysOnTop(false);
-    this.captureWindow.closable = true;
-    this.captureWindow.minimizable = true;
-    this.captureWindow.setHasShadow(true);
   }
 
   stopRecording() {
-    clearInterval(this.recordingIntervalId);
-    this.isRecording = false;
+    this.pauseRecording();
     this.numScreenshots = this.screenshotNumber;
     this.screenshotNumber = 1;
-    this.unlockRecordingScreen();
-    this.captureWindow.hide();
+    this.captureWindow.unlock();
+    this.captureWindow.window.hide();
 
     const dateIdentifier = dateFormat(new Date(), "yyyy-mm-dd'T'HH-MM-ss");
     const videoPath = path.join(this.videoDir, `${dateIdentifier}.mp4`);
@@ -378,6 +187,8 @@ class ScreenCapturer {
     this.saveWindow = new Window(saveWindowOptions);
     let saveWindowExitPrompt = this.showSaveWindowExitPrompt;
 
+    let messageBoxResponse = null;
+
     this.saveWindow.on('close', async (e) => {
       if (saveWindowExitPrompt) {
         e.preventDefault();
@@ -387,15 +198,19 @@ class ScreenCapturer {
           title: 'Confirm',
           message: `Should I delete this session's screenshots (located at "${this.screenshotSaveDir}")?`
         });
+        messageBoxResponse = messageBox.response;
         if (messageBox.response === 0 || messageBox.response === 1) {
           saveWindowExitPrompt = false;
           this.saveWindow.close();
-          if (messageBox.response === 0) {
-            rimraf(this.screenshotSaveDir, () => {
-              console.log(`Deleted ${this.screenshotSaveDir}.`);
-            });
-          }
         }
+      }
+    });
+
+    this.saveWindow.on('closed', () => {
+      if (messageBoxResponse === 0) {
+        rimraf(this.screenshotSaveDir, () => {
+          console.log(`Deleted ${this.screenshotSaveDir}.`);
+        });
       }
     });
 
@@ -407,11 +222,12 @@ class ScreenCapturer {
 
   saveRecording(savePath) {
     // ffmpeg -framerate 24 -i ~/Desktop/WBSScreenshots/$uuid-%08d.jpg $name.mp4
+    const {width, height} = this.captureWindow;
 
     let scaleString = 'scale=';
-    if (this.width % 2 === 0) scaleString += `${this.width}:-2`;
-    else if (this.height % 2 === 0) scaleString += `-2:${this.height}`;
-    else scaleString += `${Math.floor(this.width / 2) * 2}:-2`;
+    if (width % 2 === 0) scaleString += `${width}:-2`;
+    else if (height % 2 === 0) scaleString += `-2:${height}`;
+    else scaleString += `${Math.floor(width / 2) * 2}:-2`;
 
     const ffmpeg = spawn(ffmpegPath, [
       '-framerate', '24',
@@ -446,11 +262,6 @@ class ScreenCapturer {
       this.saveProgressWindow.close();
     });
   }
-
-  openSettings() {
-
-  }
-
 }
 
 module.exports = ScreenCapturer;
