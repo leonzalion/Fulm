@@ -4,10 +4,9 @@
     <list default="true" id="ecdd984f-84e1-4170-b670-ae5381f54271" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ScreenCapturer.js" beforeDir="false" afterPath="$PROJECT_DIR$/ScreenCapturer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/trayWindow/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/trayWindow/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/trayWindow/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/trayWindow/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/trayWindow/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/trayWindow/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/saveWindow/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/saveWindow/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/saveWindow/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/saveWindow/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/saveWindow/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/saveWindow/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,19 +45,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/renderer/captureWindow" />
-      <recent name="$PROJECT_DIR$/renderer/trayWindow" />
-      <recent name="$PROJECT_DIR$/renderer" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/redux/reducers" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/renderer/settingsWindow" />
       <recent name="$PROJECT_DIR$/renderer/captureWindow" />
       <recent name="$PROJECT_DIR$/renderer/trayWindow" />
       <recent name="$PROJECT_DIR$/renderer/saveWindow" />
       <recent name="$PROJECT_DIR$/renderer/save-progress" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/renderer/captureWindow" />
+      <recent name="$PROJECT_DIR$/renderer/trayWindow" />
+      <recent name="$PROJECT_DIR$/renderer" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/redux/reducers" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -103,6 +102,8 @@
       <workItem from="1584562169285" duration="503000" />
       <workItem from="1584567336827" duration="10657000" />
       <workItem from="1584581406383" duration="2807000" />
+      <workItem from="1584587325420" duration="40000" />
+      <workItem from="1584587432281" duration="4106000" />
     </task>
     <servers />
   </component>

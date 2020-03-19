@@ -113,7 +113,7 @@ class ScreenCapturer {
   }
 
   setupWindows() {
-    const trayWindowOptions = {
+    let trayWindowOptions = {
       file: './renderer/trayWindow/index.html',
       width: 140,
       height: 85,
@@ -131,8 +131,6 @@ class ScreenCapturer {
         break;
       case 'win32':
         trayWindowOptions.backgroundColor = '#000';
-        trayWindowOptions.center = true;
-        trayWindowOptions.showOnReady = true;
         break;
     }
 
@@ -146,29 +144,37 @@ class ScreenCapturer {
       tray: tray
     });
 
-    mb.on('after-create-window', () => {
+    mb.on('after-create-window', async () => {
       this.trayWindow = mb.window;
       mb.window.setAlwaysOnTop(true, "pop-up-menu", 1);
+      await mb.showWindow();
     });
+
+    this.openCaptureWindow(false);
   }
 
-  openSettingsWindow() {
+
+  openSettingsWindow(shouldShow = true) {
     if (this.settingsWindow) {
       this.settingsWindow.show();
       return;
     }
 
-    this.settingsWindow = new Window({
+    let settingsWindowOptions = {
       file: './renderer/settingsWindow/index.html',
-      showOnReady: true
-    });
+      showOnReady: shouldShow,
+      titleBarStyle: 'hidden',
+    };
+
+
+    this.settingsWindow = new Window(settingsWindowOptions);
 
     this.settingsWindow.on('closed', () => {
       this.settingsWindow = null;
     });
   }
 
-  openCaptureWindow() {
+  openCaptureWindow(shouldShow = true) {
     if (this.captureWindow) {
       this.captureWindow.show();
       return;
@@ -183,7 +189,7 @@ class ScreenCapturer {
       backgroundColor: '#10FFFFFF',
       enableLargerThanScreen: true,
       resizable: true,
-      showOnReady: true,
+      showOnReady: shouldShow,
       webPreferences: {
         nodeIntegration: true
       }
@@ -310,12 +316,24 @@ class ScreenCapturer {
     const dateIdentifier = dateFormat(new Date(), "yyyy-mm-dd'T'HH-MM-ss");
     const videoPath = path.join(this.videoDir, `${dateIdentifier}.mp4`);
 
-    this.saveWindow = new Window({
+    let saveWindowOptions = {
       file: './renderer/saveWindow/index.html',
-      height: 75,
+      height: 72,
       width: 500,
-      showOnReady: true
-    });
+      showOnReady: true,
+      frame: false
+    };
+
+    switch (process.platform) {
+      case 'darwin':
+        saveWindowOptions.vibrancy = 'menu';
+        break;
+      case 'win32':
+        saveWindowOptions.backgroundColor = '#000';
+        break;
+    }
+
+    this.saveWindow = new Window(saveWindowOptions);
 
     this.saveWindow.on("ready-to-show", () => {
       this.saveWindow.webContents.send('savePath', videoPath);
@@ -330,6 +348,7 @@ class ScreenCapturer {
       '-framerate', '24',
       '-i', `${this.saveDir}/%d.jpg`,
       '-pix_fmt', 'yuv420p',
+      '-vf', '"pad=ceil(iw/2)*2:ceil(ih/2)*2"',
       savePath
     ]);
 
