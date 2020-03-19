@@ -262,6 +262,7 @@ class ScreenCapturer {
     fs.mkdirSync(this.saveDir);
 
     this.lockRecordingScreen();
+    this.trayWindow.hide();
 
     const self = this;
     this.isRecording = true;
@@ -344,11 +345,16 @@ class ScreenCapturer {
   saveRecording(savePath) {
     // ffmpeg -framerate 24 -i ~/Desktop/WBSScreenshots/$uuid-%08d.jpg $name.mp4
 
+    let scaleString = 'scale=';
+    if (this.width % 2 === 0) scaleString += `${this.width}:-2`;
+    else if (this.height % 2 === 0) scaleString += `-2:${this.height}`;
+    else scaleString += `${Math.floor(this.width / 2) * 2}:-2`;
+
     const ffmpeg = spawn(ffmpegPath, [
       '-framerate', '24',
       '-i', `${this.saveDir}/%d.jpg`,
       '-pix_fmt', 'yuv420p',
-      '-vf', '"pad=ceil(iw/2)*2:ceil(ih/2)*2"',
+      '-vf', scaleString,
       savePath
     ]);
 
