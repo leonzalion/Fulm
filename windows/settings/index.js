@@ -1,9 +1,11 @@
-const {Window} = require('electron');
+const Window = require('../../Window');
 const observeStore = require('../../redux/observeStore');
+const windows = require('../../redux/slices/windows');
 
 module.exports = class SettingsWindow {
   constructor(store) {
     this.store = store;
+
     observeStore(this.store, state => state.windows.settings.open, async isOpen => {
       if (isOpen) await this.open();
       else if (this.window) this.window.hide();
@@ -14,13 +16,37 @@ module.exports = class SettingsWindow {
     let settingsWindowOptions = {
       file: './renderer/settingsWindow/index.html',
       titleBarStyle: 'hidden',
+      fullscreenable: false,
+      webPreferences: {
+        nodeIntegration: true
+      }
     };
+
+    switch (process.platform) {
+      case 'darwin':
+        settingsWindowOptions.vibrancy = 'menu';
+        break;
+      case 'win32':
+        settingsWindowOptions.backgroundColor = '#000';
+        break;
+    }
 
     this.window = new Window(settingsWindowOptions);
 
-    this.window.on('closed', () => {
-      this.window = null;
+    this.window.on('focus', () => {
+      this.store.dispatch(windows.actions.show({window: 'settings'}));
     });
+
+    this.window.on('blur', () => {
+      this.store.dispatch(windows.actions.hide({window: 'settings'}));
+    });
+
+    this.window.on('close', () => {
+      this.window = null;
+      this.store.dispatch(windows.actions.hide({window: 'settings'}));
+    });
+
+
   }
 
   async open() {

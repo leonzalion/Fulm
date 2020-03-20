@@ -2,28 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ecdd984f-84e1-4170-b670-ae5381f54271" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/redux/slices/recording.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/redux/slices/windows.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/windows/save/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yarn-error.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Fulmeto.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Fulmeto.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ScreenCapturer.js" beforeDir="false" afterPath="$PROJECT_DIR$/ScreenCapturer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/createMainStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/createMainStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/createRendererStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/createRendererStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/initialState.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducers/recording.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducers/settings.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducers/window.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/saveWindow/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/saveWindow/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/saveWindow/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/saveWindow/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/trayWindow/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/trayWindow/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/settingsWindow/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/settingsWindow/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer/settingsWindow/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/settingsWindow/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/windows/capture/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/windows/capture/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/save/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/windows/save/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/windows/settings/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/windows/settings/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/tray/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/windows/tray/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +124,7 @@
       <workItem from="1584643109743" duration="66000" />
       <workItem from="1584643265885" duration="4190000" />
       <workItem from="1584648184417" duration="3501000" />
-      <workItem from="1584656665720" duration="11948000" />
+      <workItem from="1584656665720" duration="13067000" />
     </task>
     <servers />
   </component>

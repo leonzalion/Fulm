@@ -6,14 +6,18 @@ const Jimp = require('jimp');
 const {app, ipcMain} = require('electron');
 const dateFormat = require('dateformat');
 const observeStore = require('./redux/observeStore');
+
 const recording = require('./redux/slices/recording');
 const windows = require('./redux/slices/windows');
+
 const TrayWindow = require('./windows/tray');
 const CaptureWindow = require('./windows/capture');
 const SettingsWindow = require('./windows/settings');
 const SaveWindow = require('./windows/save');
+
 const eStore = require('electron-store');
 const estore = new eStore();
+
 const rimraf = require('rimraf');
 const spawn = require('child_process').spawn;
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
@@ -22,7 +26,6 @@ class ScreenCapturer {
   screenshotDelay = 2;
   isRecording = false;
   screenshotNumber = 1;
-  showSaveWindowExitPrompt = true;
 
   constructor({
     store,
@@ -94,8 +97,6 @@ class ScreenCapturer {
     ipcMain.handle('saveTimeLapse', (event, savePath) => {
       this.saveRecording(savePath);
     });
-
-
   }
 
   async takeScreenshot() {

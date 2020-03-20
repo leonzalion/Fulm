@@ -14,6 +14,7 @@ module.exports = class SaveWindow {
       width: 500,
       showOnReady: true,
       titleBarStyle: 'hidden',
+      fullscreenable: false,
       webPreferences: {
         nodeIntegration: true
       }

@@ -34,6 +34,7 @@ module.exports = class CaptureWindow {
       backgroundColor: '#10FFFFFF',
       enableLargerThanScreen: true,
       resizable: true,
+      fullscreenable: false,
       webPreferences: {
         nodeIntegration: true
       }

@@ -13,6 +13,7 @@ module.exports = class TrayWindow {
       frame: false,
       resizable: false,
       acceptFirstMouse: true,
+      fullscreenable: false,
       webPreferences: {
         nodeIntegration: true
       }
