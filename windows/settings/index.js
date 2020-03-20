@@ -4,7 +4,7 @@ const observeStore = require('../../redux/observeStore');
 module.exports = class SettingsWindow {
   constructor(store) {
     this.store = store;
-    observeStore(this.store, state => state.window.settings.isOpen, async isOpen => {
+    observeStore(this.store, state => state.windows.settings.open, async isOpen => {
       if (isOpen) await this.open();
       else if (this.window) this.window.hide();
     });

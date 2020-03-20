@@ -3,15 +3,20 @@ const Window = require('./Window');
 const path = require('path');
 const fs = require('fs');
 const Jimp = require('jimp');
-const {app, ipcMain, dialog} = require('electron');
+const {app, ipcMain} = require('electron');
 const dateFormat = require('dateformat');
-const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
-const spawn = require('child_process').spawn;
 const observeStore = require('./redux/observeStore');
-const rimraf = require('rimraf');
+const recording = require('./redux/slices/recording');
+const windows = require('./redux/slices/windows');
 const TrayWindow = require('./windows/tray');
 const CaptureWindow = require('./windows/capture');
 const SettingsWindow = require('./windows/settings');
+const SaveWindow = require('./windows/save');
+const eStore = require('electron-store');
+const estore = new eStore();
+const rimraf = require('rimraf');
+const spawn = require('child_process').spawn;
+const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 
 class ScreenCapturer {
   screenshotDelay = 2;
@@ -26,25 +31,28 @@ class ScreenCapturer {
     this.store = store;
     this.screenshotDelay = screenshotDelay;
 
-    this.setupPaths();
     this.setupObservers();
-    this.debug();
   };
 
   async init() {
     await this.setupWindows();
-  }
-
-  debug() {
+    this.setupPaths();
   }
 
   setupPaths() {
-    const defaultVideoDir = path.join(app.getPath('videos'), 'Fulm');
-    if (!fs.existsSync(defaultVideoDir)) fs.mkdirSync(defaultVideoDir);
-    const defaultScreenshotDir = path.join(app.getPath('pictures'), 'Fulm');
-    if (!fs.existsSync(defaultScreenshotDir)) fs.mkdirSync(defaultScreenshotDir);
-    this.videoDir = defaultVideoDir;
-    this.screenshotDir = defaultScreenshotDir;
+    this.fulmVideoDir = estore.get('settings.fulmVideoDir');
+    if (!this.fulmVideoDir) {
+      const defaultVideoDir = path.join(app.getPath('videos'), 'Fulm');
+      if (!fs.existsSync(defaultVideoDir)) fs.mkdirSync(defaultVideoDir);
+      this.fulmVideoDir = defaultVideoDir;
+    }
+
+    this.fulmScreenshotDir = estore.get('settings.fulmScreenshotDir');
+    if (!this.fulmScreenshotDir) {
+      const defaultScreenshotDir = path.join(app.getPath('pictures'), 'Fulm');
+      if (!fs.existsSync(defaultScreenshotDir)) fs.mkdirSync(defaultScreenshotDir);
+      this.fulmScreenshotDir = defaultScreenshotDir;
+    }
   }
 
   async setupWindows() {
@@ -52,38 +60,32 @@ class ScreenCapturer {
     await this.trayWindow.init();
 
     this.trayWindow.menubar.tray.on('click', () => {
-      if (this.isRecording) {
-        this.store.dispatch({
-          type: 'CHANGE_RECORDING_STATE',
-          payload: 'PAUSED'
-        });
-      }
+      if (this.isRecording) this.store.dispatch(recording.actions.pause());
     });
 
     this.captureWindow = new CaptureWindow(this.store);
     await this.captureWindow.init();
 
     this.settingsWindow = new SettingsWindow(this.store);
+
+    this.saveWindow = new SaveWindow(this.store);
   }
 
   setupObservers() {
-    observeStore(this.store, state => state.recording.state, state => {
+    observeStore(this.store, state => state.recording, state => {
       switch (state) {
-        case 'RECORDING':
+        case 'started':
           this.startRecording();
           this.trayWindow.menubar.tray.setImage('./assets/pause-icon.png');
-          this.store.dispatch({
-            type: 'HIDE_WINDOW',
-            payload: 'capture'
-          });
+          this.store.dispatch(windows.actions.hide({window: 'capture'}));
           break;
-        case 'PAUSED':
+        case 'paused':
           this.pauseRecording();
           break;
-        case 'RESUMED':
+        case 'resumed':
           this.resumeRecording();
           break;
-        case 'STOPPED':
+        case 'stopped':
           this.stopRecording();
           break;
       }
@@ -93,39 +95,24 @@ class ScreenCapturer {
       this.saveRecording(savePath);
     });
 
-    ipcMain.handle('selectDirectory', () => {
-      return dialog.showSaveDialogSync(this.saveWindow, {
-        filters: [
-          {name: 'Movies', extensions: ['mp4']}
-        ],
-        defaultPath: '~/Untitled.mp4',
-        properties: ["createDirectory"]
-      });
-    });
-
-
-
-
 
   }
-
-
 
   async takeScreenshot() {
     const {x, y, width, height} = this.captureWindow;
     if (this.isRecording) {
       console.log('screenshot no.' + this.screenshotNumber);
-      const screenshotPath = path.join(this.screenshotSaveDir, `${this.screenshotNumber++}.jpg`);
+      const screenshotFile = path.join(this.sessionScreenshotDir, `${this.screenshotNumber++}.jpg`);
       await screenshot({
         screen: this.captureWindow.captureDisplayId,
-        filename: screenshotPath
+        filename: screenshotFile
       });
 
       // editing screenshot
-      const image = await Jimp.read(screenshotPath);
-      image.crop(x, y, width, height).write(screenshotPath);
+      const image = await Jimp.read(screenshotFile);
+      image.crop(x, y, width, height).write(screenshotFile);
 
-      this.trayWindow.window.webContents.send('tookScreenshot', screenshotPath);
+      this.trayWindow.window.webContents.send('tookScreenshot', screenshotFile);
     }
   }
 
@@ -133,8 +120,8 @@ class ScreenCapturer {
     this.captureWindow.save();
 
     const dateIdentifier = dateFormat(new Date(), "yyyy-mm-dd'T'HH-MM-ss");
-    this.screenshotSaveDir = path.join(this.screenshotDir, dateIdentifier);
-    fs.mkdirSync(this.screenshotSaveDir);
+    this.sessionScreenshotDir = path.join(this.fulmScreenshotDir, dateIdentifier);
+    fs.mkdirSync(this.sessionScreenshotDir);
     this.captureWindow.lock();
 
     this.resumeRecording();
@@ -165,65 +152,25 @@ class ScreenCapturer {
     this.captureWindow.window.hide();
 
     const dateIdentifier = dateFormat(new Date(), "yyyy-mm-dd'T'HH-MM-ss");
-    const videoPath = path.join(this.videoDir, `${dateIdentifier}.mp4`);
+    this.videoFile = path.join(this.fulmVideoDir, `${dateIdentifier}.mp4`);
 
-    let saveWindowOptions = {
-      file: './renderer/saveWindow/index.html',
-      height: 132,
-      width: 500,
-      showOnReady: true,
-      titleBarStyle: 'hidden'
-    };
-
-    switch (process.platform) {
-      case 'darwin':
-        saveWindowOptions.vibrancy = 'menu';
-        break;
-      case 'win32':
-        saveWindowOptions.backgroundColor = '#000';
-        break;
-    }
-
-    this.saveWindow = new Window(saveWindowOptions);
-    let saveWindowExitPrompt = this.showSaveWindowExitPrompt;
-
-    let messageBoxResponse = null;
-
-    this.saveWindow.on('close', async (e) => {
-      if (saveWindowExitPrompt) {
-        e.preventDefault();
-        const messageBox = await dialog.showMessageBox({
-          type: 'question',
-          buttons: ['Yes', 'No', 'Cancel'],
-          title: 'Confirm',
-          message: `Should I delete this session's screenshots (located at "${this.screenshotSaveDir}")?`
-        });
-        messageBoxResponse = messageBox.response;
-        if (messageBox.response === 0 || messageBox.response === 1) {
-          saveWindowExitPrompt = false;
-          this.saveWindow.close();
+    (async () => {
+      await this.saveWindow.open();
+      this.saveWindow.window.on('closed', () => {
+        if (this.saveWindow.messageBoxResponse === 0) {
+          rimraf(this.sessionScreenshotDir, () => {
+            console.log(`Deleted ${this.sessionScreenshotDir}.`);
+          });
         }
-      }
-    });
-
-    this.saveWindow.on('closed', () => {
-      if (messageBoxResponse === 0) {
-        rimraf(this.screenshotSaveDir, () => {
-          console.log(`Deleted ${this.screenshotSaveDir}.`);
-        });
-      }
-    });
-
-    this.saveWindow.on("ready-to-show", () => {
-      this.saveWindow.webContents.send('savePath', videoPath);
-    });
-
+      });
+      this.saveWindow.window.webContents.send('savePath', this.videoFile);
+    })();
   }
 
-  saveRecording(savePath) {
-    // ffmpeg -framerate 24 -i ~/Desktop/WBSScreenshots/$uuid-%08d.jpg $name.mp4
+  saveRecording() {
     const {width, height} = this.captureWindow;
 
+    // ffmpeg -framerate 24 -i ~/Desktop/WBSScreenshots/$uuid-%08d.jpg $name.mp4
     let scaleString = 'scale=';
     if (width % 2 === 0) scaleString += `${width}:-2`;
     else if (height % 2 === 0) scaleString += `-2:${height}`;
@@ -231,10 +178,10 @@ class ScreenCapturer {
 
     const ffmpeg = spawn(ffmpegPath, [
       '-framerate', '24',
-      '-i', `${this.screenshotSaveDir}/%d.jpg`,
+      '-i', `${this.sessionScreenshotDir}/%d.jpg`,
       '-pix_fmt', 'yuv420p',
       '-vf', scaleString,
-      savePath
+      this.videoFile
     ]);
 
     this.saveProgressWindow = new Window({
@@ -262,6 +209,8 @@ class ScreenCapturer {
       this.saveProgressWindow.close();
     });
   }
+
+
 }
 
 module.exports = ScreenCapturer;

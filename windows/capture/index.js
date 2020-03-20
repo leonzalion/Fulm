@@ -2,6 +2,8 @@ const Window = require('../../Window');
 const {screen, ipcMain} = require('electron');
 const contextMenu = require('electron-context-menu');
 const observeStore = require('../../redux/observeStore');
+const recording = require('../../redux/slices/recording');
+const windows = require('../../redux/slices/windows');
 
 module.exports = class CaptureWindow {
   width = 800;
@@ -11,7 +13,7 @@ module.exports = class CaptureWindow {
 
   constructor(store) {
     this.store = store;
-    observeStore(this.store, state => state.window.capture.isOpen, async isOpen => {
+    observeStore(this.store, state => state.windows.capture.open, async isOpen => {
       if (isOpen) await this.open();
       else if (this.window) this.window.hide();
     });
@@ -82,23 +84,15 @@ module.exports = class CaptureWindow {
       prepend: (defaultActions, params, browserWindow) => [
         {
           label: "Start Capture",
-          click: () => self.store.dispatch({
-            type: 'CHANGE_RECORDING_STATE',
-            payload: 'RECORDING'
-          })
+          click: () => self.store.dispatch(recording.actions.start()),
         },
         {
           label: "Hide Capture Window",
-          click: () => self.store.dispatch({
-            type: 'HIDE_WINDOW',
-            payload: 'capture'
-          })
+          click: () => self.store.dispatch(windows.actions.hide({window: 'capture'})),
         },
         {
           label: "Snap to Top-Left",
-          click: function() {
-            self.window.setBounds({x: 0, y: 0});
-          }
+          click: () => self.store.dispatch(windows.actions.adjust({window: 'capture', x: 0, y: 0}))
         },
         {
           label: "Display to Capture",
