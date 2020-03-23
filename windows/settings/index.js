@@ -15,8 +15,9 @@ module.exports = class SettingsWindow {
   async init() {
     let settingsWindowOptions = {
       file: './renderer/settingsWindow/index.html',
-      titleBarStyle: 'hidden',
       fullscreenable: false,
+      titleBarStyle: 'hiddenInset',
+      height: 200,
       webPreferences: {
         nodeIntegration: true
       }

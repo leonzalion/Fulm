@@ -93,7 +93,11 @@ module.exports = class CaptureWindow {
         },
         {
           label: "Snap to Top-Left",
-          click: () => self.store.dispatch(windows.actions.adjust({window: 'capture', x: 0, y: 0}))
+          click: () => self.store.dispatch(windows.actions.adjust({
+            window: 'capture',
+            x: self.captureDisplay.bounds.x,
+            y: self.captureDisplay.bounds.y
+          }))
         },
         {
           label: "Display to Capture",
@@ -115,11 +119,13 @@ module.exports = class CaptureWindow {
             self.window.setBounds(self.captureDisplay.bounds);
           }
         },
+        /* TODO
         {
           label: "Hide Border when Recording",
           click: function() {
           }
         }
+        */
       ],
       window: self.window
     });

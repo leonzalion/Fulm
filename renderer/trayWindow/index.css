@@ -40,7 +40,7 @@ ion-icon:hover {
 
 .icon-grid {
   display: grid;
-  grid-template: 1fr 1fr / 2fr 1fr 1fr;
+  grid-template: 1fr 1fr / 2fr 1fr;
   width: 120px;
   height: 60px;
   justify-items: center;

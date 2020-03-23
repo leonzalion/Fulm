@@ -31,26 +31,6 @@ module.exports = class SaveWindow {
 
     this.window = new Window(saveWindowOptions);
 
-
-    let shouldSaveWindowExit = true;
-
-    this.window.on('close', async (e) => {
-      if (shouldSaveWindowExit) {
-        e.preventDefault();
-        const messageBox = await dialog.showMessageBox({
-          type: 'question',
-          buttons: ['Yes', 'No', 'Cancel'],
-          title: 'Confirm',
-          message: `Should I delete this session's screenshots (located at "${this.screenshotSaveDir}")?`
-        });
-        this.messageBoxResponse = messageBox.response;
-        if (messageBox.response === 0 || messageBox.response === 1) {
-          shouldSaveWindowExit = false;
-          this.window.close();
-        }
-      }
-    });
-
     ipcMain.handle('selectDirectory', () => {
       return dialog.showSaveDialogSync(this.window, {
         filters: [

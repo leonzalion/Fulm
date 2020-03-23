@@ -3,10 +3,29 @@
   <head>
     <meta charset="UTF-8">
     <title>Settings!</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <link href="./index.css" type="text/css" rel="stylesheet" />
   </head>
   <body>
-    Screenshots per second: <input type="text" id="screenshots-per-second-setting" />
-    <button onClick="saveSettings()" id="save-settings">Save Settings!</button>
+    <div id="header"></div>
+    <div id="container">
+      <div class="setting">
+        <ion-icon class="setting-icon" name="images-outline"></ion-icon>
+        <div class="setting-title">
+          Delay between screenshots (in seconds)
+        </div>
+        <div class="setting-description">
+          At this speed, you would need to record for <span id="minutes-needed-per-minute"></span> minutes for Fulm to produce
+          1 minute of time-lapse video.
+        </div>
+        <input class="setting-input" type="number" id="screenshot-delay" min="1" />
+      </div>
+      <div id="save-button">
+        <ion-icon name="save-outline"></ion-icon>
+        <span class="save-text">Save Changes</span>
+      </div>
+      <div id="save-notice-text" style="display: none">Changes saved!</div>
+    </div>
     <script src="./index.js"></script>
   </body>
 </html>

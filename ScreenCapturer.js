@@ -3,7 +3,7 @@ const Window = require('./Window');
 const path = require('path');
 const fs = require('fs');
 const Jimp = require('jimp');
-const {app, ipcMain} = require('electron');
+const {app, ipcMain, dialog} = require('electron');
 const dateFormat = require('dateformat');
 const observeStore = require('./redux/observeStore');
 
@@ -15,24 +15,21 @@ const CaptureWindow = require('./windows/capture');
 const SettingsWindow = require('./windows/settings');
 const SaveWindow = require('./windows/save');
 
-const eStore = require('electron-store');
-const estore = new eStore();
+const EStore = require('electron-store');
+const estore = new EStore();
 
 const rimraf = require('rimraf');
 const spawn = require('child_process').spawn;
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 
 class ScreenCapturer {
-  screenshotDelay = 2;
   isRecording = false;
   screenshotNumber = 1;
 
   constructor({
     store,
-    screenshotDelay = this.screenshotDelay
   } = {}) {
     this.store = store;
-    this.screenshotDelay = screenshotDelay;
 
     this.setupObservers();
   };
@@ -70,7 +67,6 @@ class ScreenCapturer {
     await this.captureWindow.init();
 
     this.settingsWindow = new SettingsWindow(this.store);
-
     this.saveWindow = new SaveWindow(this.store);
   }
 
@@ -120,6 +116,7 @@ class ScreenCapturer {
   startRecording() {
     this.captureWindow.save();
 
+    this.screenshotDelay = estore.get('settings.screenshotDelay') || 3;
     const dateIdentifier = dateFormat(new Date(), "yyyy-mm-dd'T'HH-MM-ss");
     this.sessionScreenshotDir = path.join(this.fulmScreenshotDir, dateIdentifier);
     fs.mkdirSync(this.sessionScreenshotDir);
@@ -155,16 +152,37 @@ class ScreenCapturer {
     const dateIdentifier = dateFormat(new Date(), "yyyy-mm-dd'T'HH-MM-ss");
     this.videoFile = path.join(this.fulmVideoDir, `${dateIdentifier}.mp4`);
 
+
+
     (async () => {
       await this.saveWindow.open();
       this.saveWindow.window.on('closed', () => {
-        if (this.saveWindow.messageBoxResponse === 0) {
+        if (this.messageBoxResponse === 0) {
           rimraf(this.sessionScreenshotDir, () => {
             console.log(`Deleted ${this.sessionScreenshotDir}.`);
           });
         }
       });
       this.saveWindow.window.webContents.send('savePath', this.videoFile);
+
+      let shouldSaveWindowExit = true;
+
+      this.saveWindow.window.on('close', async (e) => {
+        if (shouldSaveWindowExit) {
+          e.preventDefault();
+          const messageBox = await dialog.showMessageBox({
+            type: 'question',
+            buttons: ['Yes', 'No', 'Cancel'],
+            title: 'Confirm',
+            message: `Should I delete this session's screenshots (located at "${this.sessionScreenshotDir}")?`
+          });
+          this.messageBoxResponse = messageBox.response;
+          if (messageBox.response === 0 || messageBox.response === 1) {
+            shouldSaveWindowExit = false;
+            this.saveWindow.window.close();
+          }
+        }
+      });
     })();
   }
 
@@ -185,12 +203,27 @@ class ScreenCapturer {
       this.videoFile
     ]);
 
-    this.saveProgressWindow = new Window({
+    let saveProgressWindowOptions = {
       file: './renderer/saveProgressWindow/index.html',
-      height: 100,
-      width: 800,
-      showOnReady: true
-    });
+      height: 50,
+      width: 500,
+      showOnReady: true,
+      frame: false,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    };
+
+    switch (process.platform) {
+      case 'darwin':
+        saveProgressWindowOptions.vibrancy = 'menu';
+        break;
+      case 'win32':
+        saveProgressWindowOptions.backgroundColor = '#000';
+        break;
+    }
+
+    this.saveProgressWindow = new Window(saveProgressWindowOptions);
 
     ffmpeg.stdout.setEncoding('utf8');
 
