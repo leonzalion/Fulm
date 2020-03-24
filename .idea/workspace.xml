@@ -2,16 +2,240 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ecdd984f-84e1-4170-b670-ae5381f54271" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/renderer/settingsWindow/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Electron Framework" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Libraries" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Resources" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/libEGL.dylib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/libGLESv2.dylib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/libswiftshader_libEGL.dylib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/libswiftshader_libGLESv2.dylib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/MainMenu.nib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/am.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ar.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/bg.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/bn.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ca.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/chrome_100_percent.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/chrome_200_percent.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/crashpad_handler" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/cs.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/da.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/de.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/el.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/en.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/en_GB.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/es.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/es_419.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/et.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/fa.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/fi.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/fil.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/fr.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/gu.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/he.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/hi.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/hr.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/hu.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/icudtl.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/id.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/it.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ja.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/kn.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ko.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/lt.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/lv.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ml.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/mr.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ms.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/nb.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/nl.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/pl.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/pt_BR.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/pt_PT.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/resources.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ro.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ru.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/sk.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/sl.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/sr.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/sv.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/sw.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/ta.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/te.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/th.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/tr.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/uk.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/v8_context_snapshot.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/vi.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/zh_CN.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/zh_TW.lproj/locale.pak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Electron Framework.framework/Versions/Current" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Fulm Helper (GPU).app/Contents/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Fulm Helper (GPU).app/Contents/MacOS/Fulm Helper (GPU)" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Fulm Helper (GPU).app/Contents/PkgInfo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Fulm Helper (Plugin).app/Contents/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Fulm Helper (Plugin).app/Contents/MacOS/Fulm Helper (Plugin)" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Fulm Helper (Plugin).app/Contents/PkgInfo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Fulm Helper (Renderer).app/Contents/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Fulm Helper (Renderer).app/Contents/MacOS/Fulm Helper (Renderer)" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Fulm Helper (Renderer).app/Contents/PkgInfo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Fulm Helper.app/Contents/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Fulm Helper.app/Contents/MacOS/Fulm Helper" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Fulm Helper.app/Contents/PkgInfo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Headers" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Mantle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Modules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Resources" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/MTLJSONAdapter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/MTLManagedObjectAdapter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/MTLModel+NSCoding.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/MTLModel.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/MTLValueTransformer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/Mantle.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/NSArray+MTLManipulationAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/NSDictionary+MTLManipulationAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/NSObject+MTLComparisonAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/NSValueTransformer+MTLInversionAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Headers/NSValueTransformer+MTLPredefinedTransformerAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Mantle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Modules/module.modulemap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/A/Resources/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Mantle.framework/Versions/Current" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Headers" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Modules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/ReactiveCocoa" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Resources" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/EXTKeyPathCoding.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/EXTScope.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSArray+RACSequenceAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSControl+RACCommandSupport.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSControl+RACTextSignalSupport.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSData+RACSupport.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSDictionary+RACSequenceAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSEnumerator+RACSequenceAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSFileHandle+RACSupport.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSIndexSet+RACSequenceAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSNotificationCenter+RACSupport.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSObject+RACAppKitBindings.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSObject+RACDeallocating.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSObject+RACLifting.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSObject+RACPropertySubscribing.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSObject+RACSelectorSignal.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSOrderedSet+RACSequenceAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSSet+RACSequenceAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSString+RACSequenceAdditions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSString+RACSupport.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSText+RACSignalSupport.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSURLConnection+RACSupport.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/NSUserDefaults+RACSupport.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACBacktrace.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACBehaviorSubject.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACChannel.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACCommand.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACCompoundDisposable.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACDisposable.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACEvent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACGroupedSignal.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACKVOChannel.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACMulticastConnection.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACQueueScheduler+Subclass.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACQueueScheduler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACReplaySubject.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACScheduler+Subclass.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACScheduler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACScopedDisposable.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACSequence.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACSerialDisposable.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACSignal+Operations.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACSignal.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACStream.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACSubject.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACSubscriber.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACSubscriptingAssignmentTrampoline.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACTargetQueueScheduler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACTestScheduler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACTuple.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/RACUnit.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/ReactiveCocoa.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Headers/metamacros.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Modules/module.modulemap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/ReactiveCocoa" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/A/Resources/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/ReactiveCocoa.framework/Versions/Current" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Headers" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Modules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Resources" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Squirrel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Headers/NSBundle+SQRLVersionExtensions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Headers/NSProcessInfo+SQRLVersionExtensions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Headers/SQRLDownloadedUpdate.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Headers/SQRLUpdate.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Headers/SQRLUpdater.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Headers/Squirrel.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Modules/module.modulemap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Resources/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Resources/ShipIt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Versions/A/Squirrel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Frameworks/Squirrel.framework/Versions/Current" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/MacOS/Fulm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/PkgInfo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/.idea/Fulmeto.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/.idea/discord.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/ScreenCapturer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/Window.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/assets/fulm-logo.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/assets/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/assets/pause-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/assets/pause-icon.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/assets/stop-recording-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/redux/createMainStore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/redux/createRendererStore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/redux/observeStore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/redux/reducers/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/redux/slices/recording.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/redux/slices/windows.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/captureWindow/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/captureWindow/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/captureWindow/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/saveProgressWindow/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/saveProgressWindow/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/saveProgressWindow/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/saveWindow/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/saveWindow/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/saveWindow/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/settingsWindow/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/settingsWindow/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/settingsWindow/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/trayWindow/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/trayWindow/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/renderer/trayWindow/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/windows/capture/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/windows/save/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/windows/settings/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/windows/tray/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/yarn-error.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/app/yarn.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/Fulm.app/Contents/Resources/electron.icns" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/LICENSES.chromium.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fulm-darwin-x64/version" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/windows.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScreenCapturer.js" beforeDir="false" afterPath="$PROJECT_DIR$/ScreenCapturer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/settingsWindow/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/settingsWindow/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/settingsWindow/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/settingsWindow/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/trayWindow/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/trayWindow/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderer/trayWindow/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/renderer/trayWindow/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/capture/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/windows/capture/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/save/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/windows/save/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/settings/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/windows/settings/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,6 +353,8 @@
       <workItem from="1584656665720" duration="13107000" />
       <workItem from="1584897264462" duration="731000" />
       <workItem from="1584993989664" duration="6217000" />
+      <workItem from="1585001562125" duration="716000" />
+      <workItem from="1585002824373" duration="41000" />
     </task>
     <servers />
   </component>
@@ -139,16 +365,32 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state width="1368" height="408" key="GridCell.Tab.0.bottom" timestamp="1585001643906">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="1368" height="408" key="GridCell.Tab.0.bottom/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1585001643906" />
+    <state width="1368" height="408" key="GridCell.Tab.0.center" timestamp="1585001643905">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="1368" height="408" key="GridCell.Tab.0.center/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1585001643905" />
+    <state width="1368" height="408" key="GridCell.Tab.0.left" timestamp="1585001643905">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="1368" height="408" key="GridCell.Tab.0.left/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1585001643905" />
+    <state width="1368" height="408" key="GridCell.Tab.0.right" timestamp="1585001643906">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="1368" height="408" key="GridCell.Tab.0.right/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1585001643906" />
     <state x="933" y="466" key="SettingsEditor" timestamp="1584669043031">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="612" y="328" key="SettingsEditor/0.23.1680.1027@0.23.1680.1027" timestamp="1584214718066" />
     <state x="933" y="466" key="SettingsEditor/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1584669043031" />
-    <state x="1592" y="564" key="com.intellij.ide.util.TipDialog" timestamp="1584993990841">
+    <state x="1592" y="564" key="com.intellij.ide.util.TipDialog" timestamp="1585001645120">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="1034" y="415" key="com.intellij.ide.util.TipDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1584897267981" />
-    <state x="1592" y="564" key="com.intellij.ide.util.TipDialog/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1584993990841" />
+    <state x="1592" y="564" key="com.intellij.ide.util.TipDialog/2560.640.1280.800/0.23.2560.1417@0.23.2560.1417" timestamp="1585001645120" />
     <state x="1239" y="396" width="1041" height="671" key="find.popup" timestamp="1584998916878">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>

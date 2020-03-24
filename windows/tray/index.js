@@ -39,12 +39,18 @@ module.exports = class TrayWindow {
     });
 
     this.menubar = mb;
+    const self = this;
     return new Promise((resolve) => {
-      mb.on('after-create-window', async () => {
+      mb.on('ready', async () => {
         mb.window.setAlwaysOnTop(true, "pop-up-menu", 1);
         this.window = mb.window;
         resolve();
       });
     });
+  }
+
+  async open() {
+    if (!this.window) await this.init();
+    this.menubar.showWindow();
   }
 };

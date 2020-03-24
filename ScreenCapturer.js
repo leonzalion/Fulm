@@ -57,7 +57,8 @@ class ScreenCapturer {
 
   async setupWindows() {
     this.trayWindow = new TrayWindow(this.store);
-    await this.trayWindow.init();
+    await this.trayWindow.open();
+
 
     this.trayWindow.menubar.tray.on('click', () => {
       if (this.isRecording) this.store.dispatch(recording.actions.pause());
