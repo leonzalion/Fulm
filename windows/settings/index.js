@@ -1,6 +1,8 @@
 const Window = require('../../Window');
 const observeStore = require('../../redux/observeStore');
 const windows = require('../../redux/slices/windows');
+const {app} = require('electron');
+const path = require('path');
 
 module.exports = class SettingsWindow {
   constructor(store) {
@@ -14,7 +16,7 @@ module.exports = class SettingsWindow {
 
   async init() {
     let settingsWindowOptions = {
-      file: './renderer/settingsWindow/index.html',
+      file: path.join(app.getAppPath(), 'renderer/settingsWindow/index.html'),
       fullscreenable: false,
       titleBarStyle: 'hiddenInset',
       height: 200,

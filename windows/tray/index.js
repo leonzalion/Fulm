@@ -1,13 +1,14 @@
 const {menubar} = require('menubar');
-const {app, Tray} = require('electron');
+const {app, Tray, Menu} = require('electron');
 const path = require('path');
+const contextMenu = require('electron-context-menu');
 
 module.exports = class TrayWindow {
   constructor(store) {this.store = store;}
 
   async init() {
     let trayWindowOptions = {
-      file: './renderer/trayWindow/index.html',
+      file: path.join(app.getAppPath(), 'renderer/trayWindow/index.html'),
       width: 140,
       height: 85,
       frame: false,
@@ -30,7 +31,9 @@ module.exports = class TrayWindow {
 
     const trayWindowPath = path.join(app.getAppPath(), 'renderer/trayWindow/index.html');
 
-    const tray = new Tray('./assets/logo.png');
+    const tray = new Tray(path.join(app.getAppPath(), 'assets/logo.png'));
+
+
     const mb = menubar({
       browserWindow: trayWindowOptions,
       index: `file://${trayWindowPath}`,
@@ -44,6 +47,16 @@ module.exports = class TrayWindow {
       mb.on('ready', async () => {
         mb.window.setAlwaysOnTop(true, "pop-up-menu", 1);
         this.window = mb.window;
+        contextMenu({
+          window: this.window,
+          showInspectElement: false,
+          prepend: () => [
+            {
+              label: 'Quit Fulm',
+              role: 'quit'
+            }
+          ]
+        });
         resolve();
       });
     });

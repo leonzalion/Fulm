@@ -1,9 +1,10 @@
 const Window = require('../../Window');
-const {screen, ipcMain} = require('electron');
+const {screen, ipcMain, app} = require('electron');
 const contextMenu = require('electron-context-menu');
 const observeStore = require('../../redux/observeStore');
 const recording = require('../../redux/slices/recording');
 const windows = require('../../redux/slices/windows');
+const path = require('path');
 
 module.exports = class CaptureWindow {
   width = 800;
@@ -26,7 +27,7 @@ module.exports = class CaptureWindow {
 
   async init() {
     this.window = new Window({
-      file: './renderer/captureWindow/index.html',
+      file: path.join(app.getAppPath(), 'renderer/captureWindow/index.html'),
       width: this.width,
       height: this.height,
       transparent: true,
@@ -39,6 +40,7 @@ module.exports = class CaptureWindow {
         nodeIntegration: true
       }
     });
+
     this.window.excludedFromShownWindowsMenu = true;
     this.window.setBounds({x: 0, y: 0});
     this.window.setAlwaysOnTop(true, "pop-up-menu", 0);

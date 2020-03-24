@@ -1,4 +1,5 @@
 const {app, dialog, ipcMain} = require('electron');
+const path = require('path');
 
 const Window = require('../../Window');
 const eStore = require('electron-store');
@@ -9,7 +10,7 @@ module.exports = class SaveWindow {
 
   async init() {
     let saveWindowOptions = {
-      file: './renderer/saveWindow/index.html',
+      file: path.join(app.getAppPath(), 'renderer/saveWindow/index.html'),
       height: 132,
       width: 500,
       showOnReady: true,

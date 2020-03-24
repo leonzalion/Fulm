@@ -76,7 +76,7 @@ class ScreenCapturer {
       switch (state) {
         case 'started':
           this.startRecording();
-          this.trayWindow.menubar.tray.setImage('./assets/pause-icon.png');
+          this.trayWindow.menubar.tray.setImage(path.join(app.getAppPath(), 'assets/pause-icon.png'));
           this.store.dispatch(windows.actions.hide({window: 'capture'}));
           break;
         case 'paused':
@@ -128,7 +128,7 @@ class ScreenCapturer {
 
   resumeRecording() {
     this.trayWindow.window.hide();
-    this.trayWindow.menubar.tray.setImage('./assets/pause-icon.png');
+    this.trayWindow.menubar.tray.setImage(path.join(app.getAppPath(), '/assets/pause-icon.png'));
 
     this.isRecording = true;
     (async () => await this.takeScreenshot())();
@@ -138,7 +138,7 @@ class ScreenCapturer {
   }
 
   pauseRecording() {
-    this.trayWindow.menubar.tray.setImage('./assets/logo.png');
+    this.trayWindow.menubar.tray.setImage(path.join(app.getAppPath(), '/assets/logo.png'));
     this.isRecording = false;
     clearInterval(this.recordingIntervalId);
   }
