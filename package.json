@@ -1,0 +1,38 @@
+{
+  "name": "fulm",
+  "version": "1.0.0",
+  "description": "The universal time-lapse screen recorder.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "repository": "https://github.com/leonzalion/fulm",
+  "keywords": [],
+  "author": "Leon Si",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^8.1.1",
+    "electron-builder": "^22.4.1"
+  },
+  "build": {
+    "appId": "com.leonzalion.fulm"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.20",
+    "@reduxjs/toolkit": "^1.2.5",
+    "aperture": "^5.2.0",
+    "dateformat": "^3.0.3",
+    "electron-context-menu": "^0.16.0",
+    "electron-redux": "^1.4.0",
+    "electron-store": "^5.1.1",
+    "immer": "^6.0.2",
+    "jimp": "^0.9.6",
+    "jquery": "^3.4.1",
+    "menubar": "^8.0.1",
+    "redux": "^4.0.5",
+    "rimraf": "^3.0.2",
+    "screenshot-desktop": "^1.12.0"
+  }
+}

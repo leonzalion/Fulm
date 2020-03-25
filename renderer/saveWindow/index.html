@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Save Time-Lapse</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <link href="./index.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="body-container">
+      <div id="header"></div>
+      <div id="container">
+        <div id="save-container">
+          <div id="save-directory">
+            <input type="text" id="save-directory-input-box" readonly />
+            <ion-icon name="folder" id="folder-icon"></ion-icon>
+          </div>
+          <ion-icon name="save-outline" id="save-icon"></ion-icon>
+        </div>
+        <div id="save-message" style="display: none">Time-lapse saved!</div>
+      </div>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
