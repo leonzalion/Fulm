@@ -1,6 +1,6 @@
 {
   "name": "fulm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The universal time-lapse screen recorder.",
   "main": "main.js",
   "scripts": {
