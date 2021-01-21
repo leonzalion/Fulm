@@ -27,7 +27,7 @@
     "electron-context-menu": "^0.16.0",
     "electron-redux": "^1.4.0",
     "electron-store": "^5.1.1",
-    "immer": "^6.0.2",
+    "immer": "^8.0.1",
     "jimp": "^0.9.6",
     "jquery": "^3.4.1",
     "menubar": "^8.0.1",
